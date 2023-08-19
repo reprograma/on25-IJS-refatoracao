@@ -1,47 +1,53 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Estourando Balões</title>
+    <link rel='stylesheet' type="text/css" href='style.css'>
 </head>
 
 <body onload="iniciaJogo()">
     <div class="jogo-table">
-        <table class="table">
-            <tr>
-                <td>
-                    <img src="imagens/balao_azul_grande.png" />
-                </td>
-                <td>
-                    <span id="baloes_inteiros"> </span>
-                </td>
-            </tr>
-        </table>
+        <div class="table-box">
+            <table class="table">
+                <tr>
+                    <td>
+                        <img src="imagens/balao_azul_grande.png" />
+                    </td>
+                    <td>
+                        <span id="baloes_inteiros"> </span>
+                    </td>
+                </tr>
+            </table>
 
-        <table class="table">
-            <tr>
-                <td>
-                    <img src="imagens/balao_azul_grande_estourando.png" />
-                </td>
-                <td>
-                    <span id="baloes_estourados"> </span>
-                </td>
-            </tr>
-        </table>
+            <table class="table">
+                <tr>
+                    <td>
+                        <img src="imagens/balao_azul_grande_estourando.png" />
+                    </td>
+                    <td>
+                        <span id="baloes_estourados"> </span>
+                    </td>
+                </tr>
+            </table>
 
-        <table class="table-background">
-            <tr>
-                <td style="background: url('imagens/cronometro.png');text-align: center;">
-                    <span id="cronometro"></span>
-                </td>
-            </tr>
-        </table>
+            <table class="table-background">
+                <tr>
+                    <td>
+                        <img src="imagens/cronometro.png" />
+                    </td>
+                    <td>
+                        <span id="cronometro"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
+        <div id="cenario">
     </div>
-    
-    <div id="cenario"></div>
 
+    <script src="jogo.js"></script>
 </body>
-<script src="jogo.js"></script>
 
 </html>

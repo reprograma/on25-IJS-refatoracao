@@ -17,11 +17,19 @@
 }
 
 .jogo-table{
-    float:left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width:auto;
     height:500px;
     background:#fff;
-    border: solid 1px #a2a2a2;
+}
+
+.table-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .table{
@@ -35,7 +43,7 @@
     height: 132px;
 }
 
-#baloes_inteiros, #baloes_estourados{
+#baloes_inteiros, #baloes_estourados, #cronometro{
     font-size: 40px;
 }
 
@@ -44,7 +52,7 @@
     font-size: 30px
 }
 
-#cenario{
+#cenario{    
     float:left;
     width: 600px;
     height: 500px;

@@ -2,15 +2,16 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Estourando Baloes</title>
+		<title>Estourando Balões</title>
+		<link rel='stylesheet' type="text/css" href='style.css'>
 	</head>
 
 	<body>
 		<div class="principal">
 			<p class="paragrafo">
-				<p class="texto-nivel">Nivel:</p>
+				<p class="texto-nivel">Nível:</p>
 				<select id="nivel_jogo">
-					<option value="1">Facil</option>
+					<option value="1">Fácil</option>
 					<option value="2">Normal</option>
 					<option value="3">Difícil</option>
 				</select>
@@ -20,12 +21,12 @@
 				<img  src="imagens/iniciar.png" />
 			</button>
 		</div>
-	</body>
 
-	<script>
-		function iniciaJogo() {
-			var nivel_jogo = document.getElementById("nivel_jogo").value;
-			window.location.href = "jogo.html?" + nivel_jogo;
-		}
-	</script>
+		<script>
+			function iniciaJogo() {
+				let nivel_jogo = document.getElementById("nivel_jogo").value;
+				window.location.href = "jogo.html?" + nivel_jogo;
+			}
+		</script>
+	</body>
 </html>
