@@ -2,55 +2,50 @@
 
 <html>
 
-	<head>
-			<meta charset="utf-8" />
-        <title>estourando baloes</title>    
-        <script src="jogo.js"></script>
-	
-	</head>
+    <head>
+        <meta charset="utf-8" />
+        <title>estourando baloes</title>
+        <link rel="stylesheet" href="src/jogo.css">
+    </head>
 
-	<body onload="iniciaJogo()">
+    <body onload="iniciaJogo()">
 
-<div style="float:left;width:auto;height:500px;background:#fff;border: solid 1px #a2a2a2;">
-<table border="0">
-    <tr>
-        <td>
-            <img src="imagens/balao_azul_grande.png" />
-        </td>
-        <td>
-            <span id="baloes_inteiros" style="font-size: 40px;""> </span>
-        </td>
-        </tr>
-    </table>
-
-        <br />
-
-        <table border="0">
+        <div>
+            <table>
                 <tr>
                     <td>
-                        <img src="imagens/balao_azul_grande_estourando.png" />
+                        <img src="imagens/balao_azul_grande.png" />
                     </td>
                     <td>
-                       <span id="baloes_estourados" style="font-size: 40px;""> </span>
+                        <span id="baloesInteiros" class="baloes"></span>
                     </td>
+                </tr>
+            </table>
 
-    </tr>
-</table>
+            <table>
+                <tr>
+                    <td>
+                        <img src=" imagens/balao_azul_grande_estourando.png" />
+                    </td>
+                    <td>
+                        <span id="baloesEstourados" class="baloes"></span>
+                    </td>
+                </tr>
+            </table>
 
-<br/>
-<table border="0" style="width: 140px; height: 132px;">
-        <tr>
-            <td style="background: url('imagens/cronometro.png');text-align: center;">
-         <span id="cronometro" style="color:red;font-size: 30px;"></span>
-            </td>
-</tr>
-</table>
+            <table class="container">
+                <tr>
+                    <td class="background">
+                        <span id="cronometro"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
+        <div id="cenario"></div>
 
-</div>
-<div id="cenario" style="float:left;width: 600px;height: 500px;background:url('imagens/cenario.png');background-position: bottom;">
-</div>
+    </body>
 
-	</body>
+    <script src="jogo.js"></script>
 
 </html>
