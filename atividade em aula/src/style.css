@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flexContainer {
+    display: flex;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .mainContainer {
+    float: left;
+    width: auto;
+    height: 500px;
+    background-color: #fff;
+    border: solid 1px #a2a2a2;
+  }
+  
+  .wrapperCronometro {
+    width: 140px;
+    border: 0;
+    height: 132px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .imageCronometro {
+    background: url("../imagens/cronometro.png");
+    text-align: center;
+    width: 140px;
+  }
+  .cronometro {
+    height: 132px;
+    color: red;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .cenario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    float: left;
+    width: 600px;
+    height: 500px;
+    background: url("../imagens/cenario.png");
+    background-position: bottom;
+  }
+  
+  .balaoPequeno {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 14px;
+    height: 36px;
+    background-repeat: no-repeat;
+    flex-wrap: wrap;
+  }
+  
+ 
