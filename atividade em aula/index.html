@@ -2,34 +2,31 @@
 
 <html>
 
-	<head>
-			<meta charset="utf-8" />
-		<title>estourando baloes</title>
-		<script language='javascript'>
+<head>
+	<meta charset="utf-8" />
+	<title>Estourando Balões</title>
+		<p>Bem-vindo ao Jogo de Estourar Balões!</p>
+		<p>Regras:
+		</p>Nível Fácil: estoure todos os balões em 120 segundos</p>
+		</p>Nível Normal: estoure todos os balões em 60 segundos</p>
+		</p> Nível Difícil: estoure todos os balões em 30 segundos</p>
+		<p>Boa Sorte Tio Rê</p>
 
-function iniciaJogo(){
-	var nivel_jogo = document.getElementById('nivel_jogo').value;
-window.location.href = 'jogo.html?'+nivel_jogo;
-}
+</head>
 
-		</script>
-	</head>
-
-	<body>
-
-<div>
-	<p>
-		<b>nivel:</b>
-		<select id="nivel_jogo">
-			<option value="1">Facil</option>
-			<option value="2">normal</option>
-			<option value="3">dificil</option>
-		</select>
-	</p>
-	<br />
-	<img src="imagens/iniciar.png" onclick="iniciaJogo()" />
-</div>
-
-	</body>
+<body>
+	<main>
+		<div>
+			<h3>nivel:</h3>
+			<select id="nivel_jogo">
+				<option value="1">Fácil</option>
+				<option value="2">Normal</option>
+				<option value="3">Difícil</option>
+			</select>
+		</div>
+		<img src="imagens/iniciar.png" onclick="escolherNivel()" />
+	</main>
+	<script src="jogo.js"></script>
+</body>
 
 </html>

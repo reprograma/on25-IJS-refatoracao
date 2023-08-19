@@ -1,109 +1,101 @@
-function iniciaJogo(){
+function iniciaJogo() {
+  let url = window.location.search;
+  let nivel_jogo = url.replace("?", "");
 
-var url = window.location.search;
-var nivel_jogo = url.replace("?", "");
+  const tempo_segundo = nivel_jogo == 1 ? 120 : nivel_jogo == 2 ? 60 : 30;
 
-var tempo_segundo = 0;
-if(nivel_jogo == 1){//1 facil -> 120 segs
-    tempo_segundo = 120
+  document.getElementById("cronometro").innerHTML = tempo_segundo; //inserindo segundos no span
+  let qtde_baloes = 80;
+
+  cria_baloes(qtde_baloes);
+  document.getElementById("baloes_inteiros").innerHTML = qtde_baloes;
+  document.getElementById("baloes_estourados").innerHTML = 0;
+
+  contagem_tempo(tempo_segundo +1);
 }
 
-if(nivel_jogo == 2){//2 facil -> 60 segs
-    tempo_segundo = 60
+function escolherNivel() {
+  var nivel_jogo = document.getElementById("nivel_jogo").value;
+  window.location.href = "jogo.html?" + nivel_jogo;
 }
 
-if(nivel_jogo == 3){//3 dificil -> 30 segs
-    tempo_segundo = 30
-}
-
-document.getElementById('cronometro').innerHTML = tempo_segundo;//inserindo segundos no span
-var qtde_baloes = 80;
-//quantidade de baloes
-
-
-cria_baloes(qtde_baloes);
-
-// imprimir qtde de baloes inteiros
-
-document.getElementById('baloes_inteiros').innerHTML = qtde_baloes;
-document.getElementById('baloes_estourados').innerHTML = 0;
-
-contagem_tempo(tempo_segundo + 1)
-}
-
-
-function contagem_tempo(segundos){
+function contagem_tempo(segundos) {
   segundos = segundos - 1;
 
-  if (segundos == -1) {
+  if (segundos === -1) {
     clearTimeout(timerId); // para a execucao da funcao settimeout
     game_over();
     return false;
   }
-  document.getElementById('cronometro').innerHTML = segundos;
+  document.getElementById("cronometro").innerHTML = segundos;
 
-  timerId = setTimeout("contagem_tempo("+segundos+")",1000);
+
+  timerId = setTimeout(() => contagem_tempo(segundos), 1000);
 }
 
-function game_over(){
-   remove_eventos_baloes();
-  alert('AAAAAAAAh Acabou o tempo, voce nao conseguiu!')
+function game_over() {
+  remove_eventos_baloes();
+  alert("AAAAAAAAh Acabou o tempo, voce não conseguiu!");
 }
 
 function remove_eventos_baloes() {
-    var i = 1; //contado para recuperar balões por id
+  let i = 1;
 
-    //percorre o lementos de acordo com o id e só irá sair do laço quando não houver correspondência com elemento
-    while(document.getElementById('b'+i)) {
-        //retira o evento onclick do elemnto
-        document.getElementById('b'+i).onclick = '';
-        i++; //faz a iteração da variávei i
-    }
-}
-
-function cria_baloes(qtde_baloes){
-for(var i = 1; i<= qtde_baloes; i++){
-    var balao = document.createElement("img");
-    balao.src = "imagens/balao_azul_pequeno.png";
-	balao.style.margin = '10px';
-  balao.id = 'b'+i;
-  balao.onclick = function(){ estourar(this); };
-
-    document.getElementById('cenario').appendChild(balao);
-        }
-}
-
-function estourar(e){
-  var id_balao = e.id;
-  document.getElementById(id_balao).setAttribute("onclick","");
-document.getElementById(id_balao).src = "imagens/balao_azul_pequeno_estourando.png";
-pontuacao(-1);
-}
-
-function pontuacao(acao){
-var baloes_inteiros = document.getElementById('baloes_inteiros').innerHTML;
-var baloes_estourados = document.getElementById('baloes_estourados').innerHTML;
-
-baloes_inteiros = parseInt(baloes_inteiros);
-baloes_estourados = parseInt(baloes_estourados);
-
-baloes_inteiros = baloes_inteiros + acao;
-baloes_estourados = baloes_estourados - acao;
-
-document.getElementById('baloes_inteiros').innerHTML = baloes_inteiros;
-document.getElementById('baloes_estourados').innerHTML = baloes_estourados;
-situacao_jogo(baloes_inteiros);
-}
-
-function situacao_jogo(baloes_inteiros){
-  if (baloes_inteiros == 0) {
-    alert('UUUUHFA ,aha você conseguiu!');
-    parar_jogo();
-
-
+  while (document.getElementById("b" + i)) {
+    document.getElementById("b" + i).onclick = "";
+    i++;
   }
 }
 
-function parar_jogo(){
+function atribuirEvento(balao) {
+  balao.onclick = function() {
+    estourar(balao);
+  };
+}
+
+function cria_baloes(qtde_baloes) {
+  for (let i = 1; i <= qtde_baloes; i++) {
+    const idBalao = "b" + i;
+    const balao = document.createElement("img");
+    balao.src = "imagens/balao_azul_pequeno.png";
+    balao.style.margin = "10px";
+    balao.id = idBalao;
+
+    atribuirEvento(balao);
+
+    cenario.appendChild(balao);
+  }
+}
+
+function estourar(e) {
+  e.onclick = null; // sem onclick evita cliques repetidos
+  e.src = "imagens/balao_azul_pequeno_estourando.png";
+  pontuacao(-1);
+}
+
+function pontuacao(acao) {
+  let baloes_inteiros = document.getElementById("baloes_inteiros").innerHTML;
+  let baloes_estourados =
+    document.getElementById("baloes_estourados").innerHTML;
+
+  baloes_inteiros = parseInt(baloes_inteiros);
+  baloes_estourados = parseInt(baloes_estourados);
+
+  baloes_inteiros = baloes_inteiros + acao;
+  baloes_estourados = baloes_estourados - acao;
+
+  document.getElementById("baloes_inteiros").innerHTML = baloes_inteiros;
+  document.getElementById("baloes_estourados").innerHTML = baloes_estourados;
+  situacao_jogo(baloes_inteiros);
+}
+
+function situacao_jogo(baloes_inteiros) {
+  if (baloes_inteiros === 0) {
+    alert("UUUUHFA ,aha você conseguiu!");
+    parar_jogo();
+  }
+}
+
+function parar_jogo() {
   clearTimeout(timerId);
 }
