@@ -1,35 +1,31 @@
 <!doctype html>
-
 <html>
-
 	<head>
-			<meta charset="utf-8" />
-		<title>estourando baloes</title>
-		<script language='javascript'>
-
-function iniciaJogo(){
-	var nivel_jogo = document.getElementById('nivel_jogo').value;
-window.location.href = 'jogo.html?'+nivel_jogo;
-}
-
-		</script>
+		<meta charset="utf-8" />
+		<title>Estourando Baloes</title>
 	</head>
 
 	<body>
+		<div class="principal">
+			<p class="paragrafo">
+				<p class="texto-nivel">Nivel:</p>
+				<select id="nivel_jogo">
+					<option value="1">Facil</option>
+					<option value="2">Normal</option>
+					<option value="3">Difícil</option>
+				</select>
+			</p>
 
-<div>
-	<p>
-		<b>nivel:</b>
-		<select id="nivel_jogo">
-			<option value="1">Facil</option>
-			<option value="2">normal</option>
-			<option value="3">dificil</option>
-		</select>
-	</p>
-	<br />
-	<img src="imagens/iniciar.png" onclick="iniciaJogo()" />
-</div>
-
+			<button onclick="iniciaJogo()" class="botao-comecar">
+				<img  src="imagens/iniciar.png" />
+			</button>
+		</div>
 	</body>
 
+	<script>
+		function iniciaJogo() {
+			var nivel_jogo = document.getElementById("nivel_jogo").value;
+			window.location.href = "jogo.html?" + nivel_jogo;
+		}
+	</script>
 </html>
