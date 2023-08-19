@@ -1,0 +1,38 @@
+.baloes{
+    float:left;
+    width:auto;
+    height:500px;
+    background:#fff;
+    border: solid 1px #a2a2a2;
+}
+
+.estiloBalao{
+    font-size: 40px;
+}
+
+.cronometro{
+    color:red;
+    font-size: 30px;
+}
+
+.cenario{
+    float:left;
+    width: 600px;
+    height: 500px;
+    background:url('imagens/cenario.png');
+    background-position: bottom;
+}
+
+.background{
+    background: url('imagens/cronometro.png');
+    text-align: center;
+}
+
+.border{
+    width: 140px; 
+    height: 132px;
+}
+
+table{
+    border: 0;
+}
