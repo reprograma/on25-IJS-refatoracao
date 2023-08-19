@@ -1,11 +1,12 @@
+import Validar from "../utils/Validar";
+
 class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
   accountNumber;
   agency;
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static all = [];
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
@@ -16,12 +17,11 @@ class Account {
       email: undefined,
       telefone: undefined
     }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    Account.all.push(this);
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
-    let i = Account.all.indexOf(this);
+    const i = Account.all.indexOf(this);
     Account.all.splice(i, 1);
   }
 
@@ -77,9 +77,7 @@ class Account {
   createPixKey(keyValue, keyType) {
     switch (keyType) {
       case "CPF":
-        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
-
-        if (regex.test(keyValue)) {
+        if (Validar.cpf(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
         }
@@ -87,9 +85,7 @@ class Account {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
-        let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-        if (emailRegex.test(keyValue)) {
+        if (Validar.email(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
         }
@@ -97,10 +93,7 @@ class Account {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
-        let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-
-        if (phoneRegex.test(keyValue)) {
+        if (Validar.telefone(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
         }
@@ -127,8 +120,9 @@ class Account {
 
   transfer(value, accountNumber, agency) {
     const validAccount = Account.all.find(account => {
-      let accNumber = account.getAccountNumber();
-      let accAgency = account.getAgency();
+      const 
+        accNumber = account.getAccountNumber(),
+        accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
     })
 
