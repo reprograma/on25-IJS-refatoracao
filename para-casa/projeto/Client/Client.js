@@ -6,12 +6,12 @@ class Client {
   #account;
   #income;
   
-  // constructor(name, cpf, account, income) {
-  //   this.name = name;
-  //   this.#cpf = cpf;
-  //   this.#account = account;
-  //   this.#income = income;
-  // }
+  constructor() {
+    this.name = "";
+    this.#cpf = "";
+    this.#account = null;
+    this.#income = 0;
+  }
 
   registerClient(name, cpf, account, income) {
     if (account instanceof Account) {
