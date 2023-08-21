@@ -1,5 +1,4 @@
 class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
   accountNumber;
   agency;
   balance;
@@ -16,10 +15,9 @@ class Account {
       email: undefined,
       telefone: undefined
     }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    Account.all.push(this); 
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
     let i = Account.all.indexOf(this);
     Account.all.splice(i, 1);
@@ -49,13 +47,13 @@ class Account {
   }
 
   setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
-    return this.accountNumber
+    this.accountNumber = accountNumber;
+    return this.accountNumber;
   }
 
   setAgency(agency) {
-    this.agency = agency
-    return this.agency
+    this.agency = agency;
+    return this.agency;
   }
 
   setBalance(value) {
@@ -82,8 +80,7 @@ class Account {
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
@@ -92,19 +89,16 @@ class Account {
         if (emailRegex.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
         let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
 
-
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, telefone inválido");
         }
       default:
@@ -133,7 +127,7 @@ class Account {
     })
 
     if (!validAccount) {
-      throw new Error("Conta não encontrada")
+      throw new Error("Conta não encontrada");
     }
 
     if (value < 0) {
@@ -155,7 +149,7 @@ class Account {
     })
 
     if (!validAccount) {
-      throw new Error("Chave pix não encontrada")
+      throw new Error("Chave pix não encontrada");
     }
 
     if (value < 0) {

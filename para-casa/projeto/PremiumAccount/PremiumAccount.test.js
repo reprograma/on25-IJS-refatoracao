@@ -1,7 +1,7 @@
 import PremiumAccount from "./PremiumAccount.js";
 
 describe("Teste da classe premiumAccount", () => {
-  test("verificar se instancia de premiumAccount é feita corretamente", () => {
+  test("Verificar se instância de premiumAccount é feita corretamente", () => {
     const premiumAccount = new PremiumAccount();
     expect(premiumAccount instanceof PremiumAccount).toBe(true);
 
@@ -11,7 +11,7 @@ describe("Teste da classe premiumAccount", () => {
   });
 
   // positivo -> deposito com valor positivo
-  test("deposito com valor de 100 reais", () => {
+  test("Deposito com valor de 100 reais", () => {
     const premiumAccount = new PremiumAccount();
     premiumAccount.createAccount('12345', '0001', 10000, 20000);
     premiumAccount.deposit(100);
@@ -24,7 +24,7 @@ describe("Teste da classe premiumAccount", () => {
   });
 
   // negativo -> deposito com valor negativo
-  test("deposito com valor de -100", () => {
+  test("Depósito com valor de -100", () => {
     const premiumAccount = new PremiumAccount();
     premiumAccount.createAccount('12345', '0001', 10000, 20000);
     expect(() => premiumAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
@@ -36,7 +36,7 @@ describe("Teste da classe premiumAccount", () => {
   });
 
   // negativo -> deposito com valor não numérico
-  test("deposito com valor não númérico", () => {
+  test("Depósito com valor não númérico", () => {
     const premiumAccount = new PremiumAccount();
     premiumAccount.createAccount('12345', '0001', 10000, 20000);
     expect(() => premiumAccount.deposit("")).toThrow("Não é possível depositar valores não numéricos");
@@ -47,7 +47,7 @@ describe("Teste da classe premiumAccount", () => {
 
   });
 
-  test("instaciar conta com valores válidos", () => {
+  test("Instaciar conta com valores válidos", () => {
     const premiumAccount = new PremiumAccount();
     premiumAccount.createAccount('12345', '0001', 10000, 20000);
     expect(premiumAccount.getBalance()).toBe(10000);
