@@ -66,7 +66,7 @@ class Account {
   }
 
   deposit(value) {
-    Validar.numero(value, "Não é possível depositar valores não númericos ou negativos");
+    Validar.numero(value, "Não é possível depositar valores não numéricos ou negativos");
     this.balance += value;
   }
 
