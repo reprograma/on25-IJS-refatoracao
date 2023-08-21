@@ -21,8 +21,10 @@ class Account {
   }
 
   destroy() {
-    const i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    const index = Account.all.indexOf(this);
+    if(index !== -1) {
+      Account.all.splice(index, 1);
+    }
   }
 
   createAccount(accountNumber, agency, balance) {
@@ -64,14 +66,8 @@ class Account {
   }
 
   deposit(value) {
-    if (typeof value === 'string' || typeof value === 'boolean') {
-      throw new Error("Não é possível depositar valores não numéricos");
-    }
-    if (value > 0) {
-      this.balance += value;
-    } else {
-      throw new Error("Não é possível depositar valores negativos");
-    }
+    Validar.numero(value, "Não é possível depositar valores não númericos ou negativos");
+    this.balance += value;
   }
 
   createPixKey(keyValue, keyType) {
@@ -80,24 +76,21 @@ class Account {
         if (Validar.cpf(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
         if (Validar.email(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
         if (Validar.telefone(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, telefone inválido");
         }
       default:
@@ -106,33 +99,19 @@ class Account {
   }
 
   withdraw(value) {
-    if (value > 0 && typeof value === 'number') {
-      if (this.balance - value > 0) {
-        this.balance -= value;
-        return value;
-      } else {
-        throw new Error("Você não possui saldo suficiente");
-      }
-    } else {
-      throw new Error("Valor inválido de saque");
+    Validar.numero(value, "Valor inválido de saque");
+
+    if (this.balance < value) {
+      throw new Error("Você não possui saldo suficiente");
     }
+    
+    this.balance -= value;
+    return value;
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
-      const 
-        accNumber = account.getAccountNumber(),
-        accAgency = account.getAgency();
-      return accNumber === accountNumber && accAgency === agency;
-    })
-
-    if (!validAccount) {
-      throw new Error("Conta não encontrada")
-    }
-
-    if (value < 0) {
-      throw new Error("Valor inválido de transferência");
-    }
+    const validAccount = this.findAccount(accountNumber, agency);
+    Validar.numero(value, "Valor inválido de transferência");
 
     if (this.balance - value > 0) {
       validAccount.setBalance(value);
@@ -144,17 +123,8 @@ class Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
-      return account.pixKeys[keyType] === pixKey;
-    })
-
-    if (!validAccount) {
-      throw new Error("Chave pix não encontrada")
-    }
-
-    if (value < 0) {
-      throw new Error("Valor inválido de pix");
-    }
+    const validAccount = this.findAccountByPix(keyType, pixKey);
+    Validar.numero(value, "Valor inválido de pix");
 
     if (this.balance - value > 0) {
       this.balance -= value;
@@ -163,6 +133,33 @@ class Account {
     } else {
       throw new Error("Você não possui saldo suficiente");
     }
+  }
+
+  findAccount(accountNumber, agency) {
+    const validAccount = Account.all.find(account => {
+      const 
+        accNumber = account.getAccountNumber(),
+        accAgency = account.getAgency();
+      return accNumber === accountNumber && accAgency === agency;
+    })
+
+    if (!validAccount) {
+      throw new Error("Conta não encontrada");
+    }
+
+    return validAccount;
+  }
+
+  findAccountByPix(keyType, pixKey) {
+    const validAccount = Account.all.find(account => {
+      return account.pixKeys[keyType] === pixKey;
+    })
+
+    if (!validAccount) {
+      throw new Error("Chave pix não encontrada");
+    }
+
+    return validAccount;
   }
 }
 

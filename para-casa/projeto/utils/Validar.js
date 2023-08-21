@@ -13,4 +13,10 @@ export default class Validar {
     const phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
     return phoneRegex.test(value);
   }
+
+  static numero(value, message) {
+    if(value < 0 || typeof value !== "number") {
+      throw new Error(message)
+    }
+  }
 }
