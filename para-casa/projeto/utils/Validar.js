@@ -24,10 +24,10 @@ export default class Validar {
     let valid
     switch(transactionLimit) {
       case 1000:
-        valid = income < 4999;
+        valid = income < 5000;
         break
       case 5000:
-        valid = income > 5000 && income < 17999.99;
+        valid = income > 5000 && income < 18000;
         break
       default:
         valid = income >= 18000;
