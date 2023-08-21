@@ -19,4 +19,23 @@ export default class Validar {
       throw new Error(message)
     }
   }
+
+  static income(transactionLimit, income) {
+    let valid
+    switch(transactionLimit) {
+      case 1000:
+        valid = income < 4999;
+        break
+      case 5000:
+        valid = income > 5000 && income < 17999.99;
+        break
+      default:
+        valid = income >= 18000;
+        break;
+    }
+
+    if(!valid) {
+      throw new Error("Renda incompatível com o tipo de conta")
+    }
+  }
 }

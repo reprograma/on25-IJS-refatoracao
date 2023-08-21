@@ -1,4 +1,5 @@
 import Account from "../Account/Account";
+import Validar from "../utils/Validar";
 
 class GoldAccount extends Account {
   transactionLimit;
@@ -9,9 +10,8 @@ class GoldAccount extends Account {
   }
 
   createAccount(accountNumber, agency, balance, income) {
-    if (income < 5000 || income > 17999.99) {
-      throw new Error("Renda incompatível com o tipo de conta")
-    }
+    Validar.income(this.transactionLimit, income);
+    
     if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
       this.accountNumber=accountNumber;
       this.agency=agency;
