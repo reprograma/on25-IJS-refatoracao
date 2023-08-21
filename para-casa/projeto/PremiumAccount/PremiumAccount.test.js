@@ -27,7 +27,7 @@ describe("Teste da classe premiumAccount", () => {
   test("deposito com valor de -100", () => {
     const premiumAccount = new PremiumAccount();
     premiumAccount.createAccount('12345', '0001', 10000, 20000);
-    expect(() => premiumAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
+    expect(() => premiumAccount.deposit(-100)).toThrow("Não é possível depositar valores não numéricos ou negativos");
     expect(premiumAccount.getBalance()).toBe(10000);
 
     // remover da lista de instâncias

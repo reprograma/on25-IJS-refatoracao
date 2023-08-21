@@ -44,4 +44,14 @@ export default class Validar {
       throw new Error("Dados inválidos para cadastro");
     }
   }
+
+  static validTransfer(value, transactionLimit, balance) {
+    if (value > transactionLimit) {
+      throw new Error ("O seu limite de transação é de 1000 reais")
+    }
+
+    if (balance < value) {
+      throw new Error("Você não possui saldo suficiente");
+    }
+  }
 }

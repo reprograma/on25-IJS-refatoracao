@@ -24,7 +24,7 @@ class GoldAccount extends Account {
     const validAccount = this.findAccount(accountNumber, agency);
     
     Validar.numero(value, "Valor inválido de transferência");
-    this.validTransfer(value);
+    Validar.validTransfer(value, this.transactionLimit, this.balance);
 
     validAccount.deposit(value);
     this.balance -= value;
@@ -35,21 +35,11 @@ class GoldAccount extends Account {
     const validAccount = this.findAccountByPix(keyType, pixKey);
 
     Validar.numero(value, "Valor inválido de pix");
-    this.validTransfer(value);
+    Validar.validTransfer(value, this.transactionLimit, this.balance);
 
     this.balance -= value;
     validAccount.setBalance(value);
     return "Pix feito com sucesso";
-  }
-
-  validTransfer(value) {
-    if (value > this.transactionLimit) {
-      throw new Error ("O seu limite de transação é de 1000 reais")
-    }
-
-    if (this.balance < value) {
-      throw new Error("Você não possui saldo suficiente");
-    }
   }
 }
 
