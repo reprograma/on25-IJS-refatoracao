@@ -38,4 +38,10 @@ export default class Validar {
       throw new Error("Renda incompatível com o tipo de conta")
     }
   }
+
+  static detailsAccount(accountNumber, agency, balance) {
+    if(accountNumber.length !== 5 || agency.length !== 4 || balance < 0) {
+      throw new Error("Dados inválidos para cadastro");
+    }
+  }
 }
