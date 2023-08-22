@@ -12,9 +12,7 @@ class PremiumAccount extends Account {
     Validar.income(this.transactionLimit, income);
     Validar.detailsAccount(accountNumber, agency, balance);
 
-    this.accountNumber=accountNumber;
-    this.agency=agency;
-    this.balance = balance;
+    super.createAccount(accountNumber, agency, balance);
     this.income = income;
     return "Conta criada com sucesso";
   }

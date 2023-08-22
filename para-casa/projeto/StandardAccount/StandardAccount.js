@@ -13,8 +13,7 @@ class StandardAccount extends Account {
     Validar.income(this.transactionLimit, income);
     Validar.detailsAccount(accountNumber, agency, balance);
 
-    this.accountNumber=accountNumber;
-    this.agency=agency;
+    super.createAccount(accountNumber, agency, balance);
     this.balance=balance;
     return "Conta criada com sucesso";
   }
