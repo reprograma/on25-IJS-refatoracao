@@ -3,9 +3,9 @@ function iniciaJogo() {
   const nivelJogo = url.replace("?", "");
 
   let tempoEmSegundo = 0;
-  if (nivelJogo === 1) {
+  if (nivelJogo == 1) {
     tempoEmSegundo = 120;
-  } else if (nivelJogo === 2) {
+  } else if (nivelJogo == 2) {
     tempoEmSegundo = 60;
   } else {
     tempoEmSegundo = 30;
@@ -26,7 +26,7 @@ function iniciaJogo() {
 }
 
 function contagemTempo(segundos) {
-  segundos = segundos - 1;
+  segundos = -1;
 
   if (segundos === -1) {
     clearTimeout(timerId);
