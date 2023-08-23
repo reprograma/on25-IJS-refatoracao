@@ -1,56 +1,43 @@
 <!doctype html>
-
 <html>
+<head>
+    <meta charset="utf-8" />
+    <title>estourando baloes</title>    
+    <script src="jogo.js"></script>	
+    <link rel="stylesheet" href="./jogo.css" />
+</head>
+<body onload="iniciaJogo()">
+    <section class="sectionJogo">
+        <table>
+            <tr>
+                <td>
+                    <img src="imagens/balao_azul_grande.png" />
+                </td>
+                <td>
+                    <span id="baloesInteiros" class="baloes"> </span>
+                </td>
+            </tr>
+        </table>
 
-	<head>
-			<meta charset="utf-8" />
-        <title>estourando baloes</title>    
-        <script src="jogo.js"></script>
-	
-	</head>
+        <table class="table2">
+            <tr>
+                <td>
+                    <img src="imagens/balao_azul_grande_estourando.png" />
+                </td>
+                <td>
+                    <span id="baloesEstourados" class="baloes"> </span>
+                </td>
+            </tr>
+        </table>
 
-	<body onload="iniciaJogo()">
-
-<div style="float:left;width:auto;height:500px;background:#fff;border: solid 1px #a2a2a2;">
-<table border="0">
-    <tr>
-        <td>
-            <img src="imagens/balao_azul_grande.png" />
-        </td>
-        <td>
-            <span id="baloes_inteiros" style="font-size: 40px;""> </span>
-        </td>
-        </tr>
-    </table>
-
-        <br />
-
-        <table border="0">
-                <tr>
-                    <td>
-                        <img src="imagens/balao_azul_grande_estourando.png" />
-                    </td>
-                    <td>
-                       <span id="baloes_estourados" style="font-size: 40px;""> </span>
-                    </td>
-
-    </tr>
-</table>
-
-<br/>
-<table border="0" style="width: 140px; height: 132px;">
-        <tr>
-            <td style="background: url('imagens/cronometro.png');text-align: center;">
-         <span id="cronometro" style="color:red;font-size: 30px;"></span>
-            </td>
-</tr>
-</table>
-
-
-</div>
-<div id="cenario" style="float:left;width: 600px;height: 500px;background:url('imagens/cenario.png');background-position: bottom;">
-</div>
-
-	</body>
-
+        <table class="table3">
+            <tr>
+                <td class="tdCronometro">
+                    <span id="cronometro"></span>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section id="cenario"></section>
+</body>
 </html>

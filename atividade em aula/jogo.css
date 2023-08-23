@@ -1,0 +1,42 @@
+.sectionJogo{
+    float:left;
+    width:auto;
+    height:500px;
+    background:#fff;
+    border: solid 1px #a2a2a2;
+}
+
+table{
+    border: 0;
+}
+
+.table2{
+    margin-top: 5px;
+}
+
+.table3{
+    width: 140px; 
+    height: 132px; 
+}
+
+.baloes{
+    font-size: 40px;
+}
+
+#cronometro{
+    color:red;
+    font-size: 30px;
+}
+
+#cenario{
+    float: left;
+    width: 600px;
+    height: 500px;
+    background: url('imagens/cenario.png');
+    background-position: bottom;
+}
+
+.tdCronometro{
+    background: url('imagens/cronometro.png');
+    text-align: center;
+}
