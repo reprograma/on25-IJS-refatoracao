@@ -49,18 +49,15 @@ class Account {
   }
 
   setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
-    return this.accountNumber
+    this.accountNumber = accountNumber;
   }
 
   setAgency(agency) {
-    this.agency = agency
-    return this.agency
+    this.agency = agency;
   }
 
   setBalance(value) {
     this.balance += value;
-    return this.balance;
   }
 
   deposit(value) {
@@ -68,45 +65,39 @@ class Account {
       throw new Error("Não é possível depositar valores não numéricos");
     }
     if (value > 0) {
-      this.balance += value;
+      this.setBalance(value);
     } else {
       throw new Error("Não é possível depositar valores negativos");
     }
   }
 
+  validInformation(keyRegex, keyValue, keyType){
+    if (keyRegex.test(keyValue)) {
+          this.pixKeys[keyType] = keyValue;
+          return `Chave pix ${keyType} criada com sucesso`;
+        }
+        else {
+          throw new Error(`Erro, ${keyType} inválido`);
+        }
+  }
+
   createPixKey(keyValue, keyType) {
     switch (keyType) {
       case "CPF":
-        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+        let cpfRegex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+        this.validInformation(cpfRegex, keyValue, "cpf");
+        break;
 
-        if (regex.test(keyValue)) {
-          this.pixKeys.cpf = keyValue;
-          return "Chave pix cpf criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, cpf inválido");
-        }
       case "EMAIL":
         let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        this.validInformation(emailRegex, keyValue, "email");
+        break;
 
-        if (emailRegex.test(keyValue)) {
-          this.pixKeys.email = keyValue;
-          return "Chave pix email criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, email inválido");
-        }
       case "TELEFONE":
         let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-
-        if (phoneRegex.test(keyValue)) {
-          this.pixKeys.telefone = keyValue;
-          return "Chave pix telefone criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, telefone inválido");
-        }
+        this.validInformation(phoneRegex, keyValue, "telefone")
+        break;
+        
       default:
         return "Tipo de chave inexistente";
     }
@@ -125,6 +116,16 @@ class Account {
     }
   }
 
+  verifyEnoughBalance(value, validAccount){
+    if (this.balance - value > 0) {
+      validAccount.setBalance(value);
+      this.balance -= value;
+      return "Transferência feita com sucesso";
+    } else {
+      throw new Error("Você não possui saldo suficiente");
+    }
+  }
+
   transfer(value, accountNumber, agency) {
     const validAccount = Account.all.find(account => {
       let accNumber = account.getAccountNumber();
@@ -140,13 +141,9 @@ class Account {
       throw new Error("Valor inválido de transferência");
     }
 
-    if (this.balance - value > 0) {
-      validAccount.setBalance(value);
-      this.balance -= value;
-      return "Transferência feita com sucesso";
-    } else {
-      throw new Error("Você não possui saldo suficiente");
-    }
+    const response = this.verifyEnoughBalance(value, validAccount);
+    return response;
+
   }
 
   pix(value, pixKey, keyType) {
@@ -162,13 +159,8 @@ class Account {
       throw new Error("Valor inválido de pix");
     }
 
-    if (this.balance - value > 0) {
-      this.balance -= value;
-      validAccount.setBalance(value);
-      return "Pix feito com sucesso";
-    } else {
-      throw new Error("Você não possui saldo suficiente");
-    }
+    const response = this.verifyEnoughBalance(value, validAccount);
+    return response;
   }
 }
 

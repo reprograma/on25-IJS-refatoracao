@@ -79,44 +79,49 @@ describe("Teste da classe Account", () => {
 
   });
 
-  // criar chave pix cpf
   test("criar chave pix cpf com sucesso", () => {
     const account = new Account();
-    expect(account.createPixKey("37761514046", "CPF")).toBe("Chave pix cpf criada com sucesso");
+    let cpfRegex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+    expect(account.validInformation(cpfRegex, "37761514046", "CPF")).toBe("Chave pix CPF criada com sucesso")
+    
+    account.createPixKey("37761514046", "CPF")
     expect(account.pixKeys.cpf).toBe("37761514046");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
 
-  // criar chave pix email
+  
   test("criar chave pix email com sucesso", () => {
     const account = new Account();
-    expect(account.createPixKey("teste@reprograma.com.br", "EMAIL")).toBe("Chave pix email criada com sucesso");
+
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    expect(account.validInformation(emailRegex, "teste@reprograma.com.br", "EMAIL")).toBe("Chave pix EMAIL criada com sucesso")
+    
+    account.createPixKey("teste@reprograma.com.br", "EMAIL")
     expect(account.pixKeys.email).toBe("teste@reprograma.com.br");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
 
-  // criar chave pix telefone
+
   test("criar chave pix telefone com sucesso", () => {
     const account = new Account();
-    expect(account.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
+    let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+    expect(account.validInformation(phoneRegex, "11912345678", "TELEFONE")).toBe("Chave pix TELEFONE criada com sucesso")
+   
+    account.createPixKey("11912345678", "TELEFONE");
+    expect(account.pixKeys.telefone).toBe("11912345678");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
 
-  // criar chave pix invalido
   test("criar chave pix cpf inválido", () => {
     const account = new Account();
     expect(() => account.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -168,7 +173,7 @@ describe("Teste da classe Account", () => {
 
     //criar chave pix para a conta de destino
     toAccount.createPixKey("teste@reprograma.com.br", "EMAIL")
-    expect(fromAccount.pix(10, 'teste@reprograma.com.br', 'email')).toBe("Pix feito com sucesso")
+    expect(fromAccount.pix(10, 'teste@reprograma.com.br', 'email')).toBe("Transferência feita com sucesso")
     expect(toAccount.getBalance()).toBe(510);
     expect(fromAccount.getBalance()).toBe(990);
     
