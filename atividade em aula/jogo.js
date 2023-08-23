@@ -4,20 +4,20 @@ var url = window.location.search;
 var nivel_jogo = url.replace("?", "");
 
 var tempo_segundo = 0;
-if(nivel_jogo == 1){//1 facil -> 120 segs
-    tempo_segundo = 120
-}
-
-if(nivel_jogo == 2){//2 facil -> 60 segs
-    tempo_segundo = 60
-}
-
-if(nivel_jogo == 3){//3 dificil -> 30 segs
-    tempo_segundo = 30
+switch(parseInt(nivel_jogo)){
+  case 1:
+    tempoSegundo = 120;
+    break;
+  case 2:
+    tempoSegundo = 60;
+    break;
+  default:
+    tempoSegundo = 30;
+    break;
 }
 
 document.getElementById('cronometro').innerHTML = tempo_segundo;//inserindo segundos no span
-var qtde_baloes = 80;
+const qtde_baloes = 80;
 //quantidade de baloes
 
 
@@ -54,9 +54,9 @@ function remove_eventos_baloes() {
     var i = 1; //contado para recuperar balões por id
 
     //percorre o lementos de acordo com o id e só irá sair do laço quando não houver correspondência com elemento
-    while(document.getElementById('b'+i)) {
+    while(document.getElementById('balao'+ i)) {
         //retira o evento onclick do elemnto
-        document.getElementById('b'+i).onclick = '';
+        document.getElementById('balao'+ i).onclick = '';
         i++; //faz a iteração da variávei i
     }
 }
@@ -66,7 +66,7 @@ for(var i = 1; i<= qtde_baloes; i++){
     var balao = document.createElement("img");
     balao.src = "imagens/balao_azul_pequeno.png";
 	balao.style.margin = '10px';
-  balao.id = 'b'+i;
+  balao.id = 'balao'+i;
   balao.onclick = function(){ estourar(this); };
 
     document.getElementById('cenario').appendChild(balao);
@@ -81,18 +81,18 @@ pontuacao(-1);
 }
 
 function pontuacao(acao){
-var baloes_inteiros = document.getElementById('baloes_inteiros').innerHTML;
-var baloes_estourados = document.getElementById('baloes_estourados').innerHTML;
+  var baloes_inteiros = document.getElementById('baloes_inteiros').innerHTML;
+  var baloes_estourados = document.getElementById('baloes_estourados').innerHTML;
 
-baloes_inteiros = parseInt(baloes_inteiros);
-baloes_estourados = parseInt(baloes_estourados);
+  baloes_inteiros = parseInt(baloes_inteiros) + acao;
+  baloes_estourados = parseInt(baloes_estourados) + acao;
 
-baloes_inteiros = baloes_inteiros + acao;
-baloes_estourados = baloes_estourados - acao;
+// baloes_inteiros = baloes_inteiros + acao;
+// baloes_estourados = baloes_estourados - acao;
 
-document.getElementById('baloes_inteiros').innerHTML = baloes_inteiros;
-document.getElementById('baloes_estourados').innerHTML = baloes_estourados;
-situacao_jogo(baloes_inteiros);
+// document.getElementById('baloes_inteiros').innerHTML = baloes_inteiros;
+// document.getElementById('baloes_estourados').innerHTML = baloes_estourados;
+  situacao_jogo(baloes_inteiros);
 }
 
 function situacao_jogo(baloes_inteiros){

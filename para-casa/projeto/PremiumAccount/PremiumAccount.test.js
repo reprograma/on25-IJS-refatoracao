@@ -94,37 +94,38 @@ describe("Teste da classe premiumAccount", () => {
 
   });
 
-  // criar chave pix cpf
   test("criar chave pix cpf com sucesso", () => {
     const premiumAccount = new PremiumAccount();
-    expect(premiumAccount.createPixKey("37761514046", "CPF")).toBe("Chave pix cpf criada com sucesso");
+    let cpfRegex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+    expect(premiumAccount.validInformation(cpfRegex, "37761514046", "CPF")).toBe("Chave pix CPF criada com sucesso")
+    
+    premiumAccount.createPixKey("37761514046", "CPF")
     expect(premiumAccount.pixKeys.cpf).toBe("37761514046");
-
-    // remover da lista de instâncias
+    
     premiumAccount.destroy()
-
   });
 
-  // criar chave pix email
   test("criar chave pix email com sucesso", () => {
     const premiumAccount = new PremiumAccount();
-    expect(premiumAccount.createPixKey("teste@reprograma.com.br", "EMAIL")).toBe("Chave pix email criada com sucesso");
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    expect(premiumAccount.validInformation(emailRegex, "teste@reprograma.com.br", "EMAIL")).toBe("Chave pix EMAIL criada com sucesso")
+    
+    premiumAccount.createPixKey("teste@reprograma.com.br", "EMAIL")
     expect(premiumAccount.pixKeys.email).toBe("teste@reprograma.com.br");
-
-    // remover da lista de instâncias
+    
     premiumAccount.destroy()
-
   });
 
-  // criar chave pix telefone
   test("criar chave pix telefone com sucesso", () => {
     const premiumAccount = new PremiumAccount();
-    expect(premiumAccount.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
-
-    // remover da lista de instâncias
+    let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+    expect(premiumAccount.validInformation(phoneRegex, "11912345678", "TELEFONE")).toBe("Chave pix TELEFONE criada com sucesso")
+    
+    premiumAccount.createPixKey("11912345678", "TELEFONE")
+    expect(premiumAccount.pixKeys.telefone).toBe("11912345678");
+    
     premiumAccount.destroy()
-
-  });
+  })
 
   // criar chave pix invalido
   test("criar chave pix cpf inválido", () => {

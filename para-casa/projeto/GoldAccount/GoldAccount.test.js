@@ -5,12 +5,10 @@ describe("Teste da classe GoldAccount", () => {
     const goldAccount = new GoldAccount();
     expect(goldAccount instanceof GoldAccount).toBe(true);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
-  // positivo -> deposito com valor positivo
   test("deposito com valor de 100 reais", () => {
     const goldAccount = new GoldAccount();
     goldAccount.createAccount('12345', '0001', 1000, 6000);
@@ -18,31 +16,28 @@ describe("Teste da classe GoldAccount", () => {
 
     expect(goldAccount.getBalance()).toBe(1100);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
-  // negativo -> deposito com valor negativo
+
   test("deposito com valor de -100", () => {
     const goldAccount = new GoldAccount();
     goldAccount.createAccount('12345', '0001', 1000, 6000);
     expect(() => goldAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
     expect(goldAccount.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
-  // negativo -> deposito com valor não numérico
+  
   test("deposito com valor não númérico", () => {
     const goldAccount = new GoldAccount();
     goldAccount.createAccount('12345', '0001', 1000, 6000);
     expect(() => goldAccount.deposit("")).toThrow("Não é possível depositar valores não numéricos");
     expect(goldAccount.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -54,84 +49,75 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getAccountNumber()).toBe('12345');
     expect(goldAccount.getAgency()).toBe('0001');
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
-  // caso positivo -> dados válidos
   test("criar conta de com dados válidos e renda compatível", () => {
-    // numero conta (5 digitos) agencia (4 digitos) e saldo (numero positivo)
     const goldAccount = new GoldAccount();
     expect(goldAccount.createAccount("12345", "0001", 500, 6000)).toBe("Conta criada com sucesso");
     expect(goldAccount.getBalance()).toBe(500);
     expect(goldAccount.getAccountNumber()).toBe('12345');
     expect(goldAccount.getAgency()).toBe('0001');
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
   test("criar conta de com dados válidos e renda incompatível", () => {
-    // numero conta (5 digitos) agencia (4 digitos) e saldo (numero positivo)
     const goldAccount = new GoldAccount();
     expect(() => goldAccount.createAccount("12345", "0001", 500, 4000)).toThrow("Renda incompatível com o tipo de conta");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
 
-  // caso negativo -> algum dado inválido
   test("criar conta com dados inválidos", () => {
     const goldAccount = new GoldAccount();
     expect(() => goldAccount.createAccount("1234", "0001", 6000, 7000)).toThrow("Dados inválidos para cadastro");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
-  // criar chave pix cpf
   test("criar chave pix cpf com sucesso", () => {
     const goldAccount = new GoldAccount();
-    expect(goldAccount.createPixKey("37761514046", "CPF")).toBe("Chave pix cpf criada com sucesso");
+    let cpfRegex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+    expect(goldAccount.validInformation(cpfRegex, "37761514046", "CPF")).toBe("Chave pix CPF criada com sucesso")
+    
+    goldAccount.createPixKey("37761514046", "CPF")
     expect(goldAccount.pixKeys.cpf).toBe("37761514046");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
-
   });
 
-  // criar chave pix email
   test("criar chave pix email com sucesso", () => {
     const goldAccount = new GoldAccount();
-    expect(goldAccount.createPixKey("teste@reprograma.com.br", "EMAIL")).toBe("Chave pix email criada com sucesso");
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    expect(goldAccount.validInformation(emailRegex, "teste@reprograma.com.br", "EMAIL")).toBe("Chave pix EMAIL criada com sucesso")
+    
+    goldAccount.createPixKey("teste@reprograma.com.br", "EMAIL")
     expect(goldAccount.pixKeys.email).toBe("teste@reprograma.com.br");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
-
   });
 
-  // criar chave pix telefone
   test("criar chave pix telefone com sucesso", () => {
     const goldAccount = new GoldAccount();
-    expect(goldAccount.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
+    let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+    expect(goldAccount.validInformation(phoneRegex, "11912345678", "TELEFONE")).toBe("Chave pix TELEFONE criada com sucesso")
     
-    // remover da lista de instâncias
+    goldAccount.createPixKey("11912345678", "TELEFONE")
+    expect(goldAccount.pixKeys.telefone).toBe("11912345678");
+    
     goldAccount.destroy()
+  })
 
-  });
-
-  // criar chave pix invalido
   test("criar chave pix cpf inválido", () => {
     const goldAccount = new GoldAccount();
     expect(() => goldAccount.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
