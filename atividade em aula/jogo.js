@@ -35,7 +35,7 @@ function contagem_tempo(segundos) {
 
 function game_over() {
   remove_eventos_baloes();
-  alert("AAAAAAAAh Acabou o tempo, voce não conseguiu!");
+  alert("AAAAAAAAh Acabou o tempo, você não conseguiu!");
 }
 
 function remove_eventos_baloes() {

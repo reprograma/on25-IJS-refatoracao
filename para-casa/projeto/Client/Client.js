@@ -1,29 +1,58 @@
 import Account from "../Account/Account.js";
 
 class Client {
-  name;
+  #name;
   #cpf;
   #account;
   #income;
   
-  // constructor(name, cpf, account, income) {
-  //   this.name = name;
-  //   this.#cpf = cpf;
-  //   this.#account = account;
-  //   this.#income = income;
-  // }
+  constructor() {
+    this.#name = '';
+    this.#cpf = '';
+    this.#account = null;
+    this.#income = 0;
+  }
+
+  setName(name) {
+    this.#name = name;
+  }
+
+  setCPF(cpf) {
+    this.#cpf = cpf;
+  }
+
+  setAccount(account) {
+    this.#account = account instanceof Account ? account :
+     (() => { throw new Error("Erro no cadastro, dados inválidos"); })();
+  }
+  
+  setIncome(income) {
+    this.#income = income;
+  }
+
+  getName() {
+    return this.#name;
+  }
+
+  getCPF() {
+    return this.#cpf;
+  }
+
+  getAccount() {
+    return this.#account;
+  }
+
+  getIncome() {
+    return this.#income;
+  }
 
   registerClient(name, cpf, account, income) {
-    if (account instanceof Account) {
-      this.name = name;
-      this.#cpf = cpf;
-      this.#account = account;
-      this.#income = income;
+    this.setName(name);
+    this.setCPF(cpf);
+    this.setAccount(account);
+    this.setIncome(income);
 
-      return "Cliente cadastrado";
-    } else {
-      throw new Error("Erro no cadastro, dados inválidos");
-    }
+    return "Cliente cadastrado";
   }
 }
 
