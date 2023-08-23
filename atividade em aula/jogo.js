@@ -26,7 +26,7 @@ function iniciaJogo() {
 }
 
 function contagemTempo(segundos) {
-  segundos = -1;
+  segundos -= 1;
 
   if (segundos === -1) {
     clearTimeout(timerId);
