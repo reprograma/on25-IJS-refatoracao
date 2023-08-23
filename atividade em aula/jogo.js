@@ -26,9 +26,32 @@ function iniciaJogo() {
 function contagemTempo(segundos) {
   segundos--;
 
-  if (segundos === -1) {
-    clearTimeout(timerId);
-    gameOver();
+if(nivel_jogo == 3){//3 dificil -> 30 segs
+    tempo_segundo = 30
+}
+
+document.getElementById('cronometro').innerHTML = tempo_segundo;//inserindo segundos no span
+var qtde_baloes = 80;
+//quantidade de baloes
+
+
+cria_baloes(qtde_baloes);
+
+// imprimir qtde de baloes inteiros
+
+document.getElementById('baloesInteiros').innerHTML = qtde_baloes;
+document.getElementById('baloesEstourados').innerHTML = 0;
+
+contagem_tempo(tempo_segundo + 1)
+}
+
+
+function contagem_tempo(segundos){
+  segundos = segundos - 1;
+
+  if (segundos == -1) {
+    clearTimeout(timerId); // para a execucao da funcao settimeout
+    game_over();
     return false;
   }
   document.getElementById("cronometro").innerHTML = segundos;
@@ -41,11 +64,24 @@ function gameOver() {
   alert("AAAAAAAAh Acabou o tempo, você não conseguiu!");
 }
 
-function removeEventosBaloes() {
-  let i = 1;
-  while (document.getElementById("balao" + i)) {
-    document.getElementById("balao" + i).onclick = "";
-    i++;
+function remove_eventos_baloes() {
+    var i = 1; //contado para recuperar balões por id
+
+    //percorre o lementos de acordo com o id e só irá sair do laço quando não houver correspondência com elemento
+    while(document.getElementById('b'+i)) {
+        //retira o evento onclick do elemnto
+        document.getElementById('b'+i).onclick = '';
+        i++; //faz a iteração da variávei i
+    }
+}
+
+
+function situacao_jogo(baloesInteiros){
+  if (baloesInteiros == 0) {
+    alert('UUUUHFA ,aha você conseguiu!');
+    parar_jogo();
+
+
   }
 }
 

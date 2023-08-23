@@ -2,32 +2,39 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estourando balões</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estourando Balões</title>
+    <link rel="stylesheet" href="./src/style.css">
     <script src="jogo.js"></script>
-    <link rel="stylesheet" href="./src/style.css" />
+
 </head>
 
 <body onload="iniciaJogo()">
-    <div class="mainContainer">
-        <div class="flexContainer">
-            <img src="imagens/balao_azul_grande.png" />
-            <span id="baloesInteiros"></span>
-        </div>
-        <div>
-            <div class="flexContainer">
+    <div class="container">
+
+        <div class="containerMenu">
+            <div class="containerBaloon">
+                <img src="imagens/balao_azul_grande.png" />
+                <span id="baloesInteiros"> </span>
+            </div>
+
+
+            <div class="containerBaloon">
                 <img src="imagens/balao_azul_grande_estourando.png" />
-                <span id="baloesEstourados"></span>
+                <span id="baloesEstourados"> </span>
+            </div>
+
+            <div class="containerCronometro">
+                <span id="cronometro"></span>
             </div>
         </div>
-        <div class="wrapperCronometro">
-            <div class="imageCronometro">
-                <span id="cronometro" class="cronometro"></span>
-            </div>
+
+        <div class="containerScene">
+            <div id="cenario"></div>
         </div>
     </div>
-    <div id="cenario" class="cenario"></div>
+
 </body>
 
 </html>

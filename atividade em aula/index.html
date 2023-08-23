@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>estourando baloes</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Estourando Balões</title>
 	<script>
 		function iniciaJogo() {
-			var nivelJogo = document.getElementById("nivelJogo").value;
-			window.location.href = "jogo.html?" + nivelJogo;
+			let nivelJogo = document.getElementById('nivelJogo').value;
+			window.location.href = `jogo.html?${nivelJogo}`
 		}
 	</script>
 </head>
@@ -14,11 +15,11 @@
 <body>
 	<div>
 		<p>
-			<b>nivel:</b>
+			<strong>Nivel:</strong>
 			<select id="nivelJogo">
-				<option value="1">Facil</option>
-				<option value="2">normal</option>
-				<option value="3">dificil</option>
+				<option value="1">Fácil</option>
+				<option value="2">Normal</option>
+				<option value="3">Difícil</option>
 			</select>
 		</p>
 		<img src="imagens/iniciar.png" onclick="iniciaJogo()" />
