@@ -15,7 +15,7 @@ Account
   - atualizar saldo (se possivel ENTREGAR NA QUINTA)
   - criar chave pix OK
 
-  pix
+- pix
   - createPix
     - todas chaves são de texto
     - chave ser email

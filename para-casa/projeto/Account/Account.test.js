@@ -6,7 +6,7 @@ describe("Teste da classe Account", () => {
     expect(account instanceof Account).toBe(true);
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -18,7 +18,7 @@ describe("Teste da classe Account", () => {
     expect(account.getBalance()).toBe(1100);
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -29,7 +29,7 @@ describe("Teste da classe Account", () => {
     expect(account.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -40,7 +40,7 @@ describe("Teste da classe Account", () => {
     expect(account.getBalance()).toBe(500);
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -51,7 +51,7 @@ describe("Teste da classe Account", () => {
     expect(account.getAgency()).toBe('0001');
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -65,7 +65,7 @@ describe("Teste da classe Account", () => {
     expect(account.getAgency()).toBe('0001');
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -75,7 +75,7 @@ describe("Teste da classe Account", () => {
     expect(() => account.createAccount("1234", "0001", 300)).toThrow("Dados inválidos para cadastro");
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -86,7 +86,7 @@ describe("Teste da classe Account", () => {
     expect(account.pixKeys.cpf).toBe("37761514046");
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -97,7 +97,7 @@ describe("Teste da classe Account", () => {
     expect(account.pixKeys.email).toBe("teste@reprograma.com.br");
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -107,7 +107,7 @@ describe("Teste da classe Account", () => {
     expect(account.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -117,7 +117,7 @@ describe("Teste da classe Account", () => {
     expect(() => account.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   });
 
@@ -130,7 +130,7 @@ describe("Teste da classe Account", () => {
     expect(account.getBalance()).toBe(400);
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
 
   })
 
@@ -143,7 +143,7 @@ describe("Teste da classe Account", () => {
     expect(account.getBalance()).toBe(500);
     
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
   })
 
   test("sacar '-100' reais da conta", () => {
@@ -155,7 +155,7 @@ describe("Teste da classe Account", () => {
     expect(account.getBalance()).toBe(500);
 
     // remover da lista de instâncias
-    account.destroy()
+    account.removeAccount()
   })
 
   test("fazer pix com valor válido, saldo suficiente e chave válida", () => {
@@ -173,8 +173,8 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(990);
     
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo suficiente e chave inválida", () => {
@@ -192,8 +192,8 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(1000);
 
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo insuficiente e chave válida", () => {
@@ -211,8 +211,8 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(200);
 
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer pix com valor inválido, saldo suficiente e chave válida", () => {
@@ -230,8 +230,8 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente e dados válidos", () => {
@@ -247,8 +247,8 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(510);
     
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente e dados inválidos", () => {
@@ -264,8 +264,8 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(1000);
 
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo insuficiente e dados válidos", () => {
@@ -281,8 +281,8 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(200);
 
     // remover da lista de instâncias
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 
   test("fazer transferência com valor inválido, saldo suficiente e dados válidos", () => {
@@ -297,7 +297,7 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(500);
     expect(fromAccount.getBalance()).toBe(1000);
 
-    fromAccount.destroy();
-    toAccount.destroy();
+    fromAccount.removeAccount();
+    toAccount.removeAccount();
   })
 });

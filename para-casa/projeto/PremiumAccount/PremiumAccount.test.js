@@ -6,7 +6,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount instanceof PremiumAccount).toBe(true);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -19,7 +19,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getBalance()).toBe(10100);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -31,7 +31,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getBalance()).toBe(10000);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -43,7 +43,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getBalance()).toBe(10000);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -55,7 +55,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getAgency()).toBe('0001');
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -69,7 +69,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getAgency()).toBe('0001');
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -79,7 +79,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.createAccount("12345", "0001", 500, 4000)).toThrow("Renda incompatível com o tipo de conta");
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -90,7 +90,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.createAccount("1234", "0001", 20000, 20000)).toThrow("Dados inválidos para cadastro");
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -101,7 +101,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.pixKeys.cpf).toBe("37761514046");
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -112,7 +112,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.pixKeys.email).toBe("teste@reprograma.com.br");
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -122,7 +122,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -132,7 +132,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   });
 
@@ -145,7 +145,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getBalance()).toBe(19900);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
 
   })
 
@@ -158,7 +158,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getBalance()).toBe(20000);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
   })
 
   test("sacar '-100' reais da conta", () => {
@@ -170,7 +170,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getBalance()).toBe(20000);
 
     // remover da lista de instâncias
-    premiumAccount.destroy()
+    premiumAccount.removeAccount()
   })
 
   test("fazer pix com valor válido, saldo suficiente e chave válida", () => {
@@ -188,8 +188,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(9900);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo suficiente e chave inválida", () => {
@@ -207,8 +207,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(10000);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo insuficiente e chave válida", () => {
@@ -226,8 +226,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(4000);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer pix com valor inválido, saldo suficiente e chave válida", () => {
@@ -245,8 +245,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(10000);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente e dados válidos", () => {
@@ -262,8 +262,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(21000);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente e dados inválidos", () => {
@@ -279,8 +279,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(7000);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo insuficiente e dados válidos", () => {
@@ -296,8 +296,8 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(4000);
 
     // remover da lista de instâncias
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 
   test("fazer transferência com valor inválido, saldo suficiente e dados válidos", () => {
@@ -312,7 +312,7 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20000);
     expect(frompremiumAccount.getBalance()).toBe(10000);
 
-    frompremiumAccount.destroy();
-    topremiumAccount.destroy();
+    frompremiumAccount.removeAccount();
+    topremiumAccount.removeAccount();
   })
 });

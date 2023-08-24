@@ -6,7 +6,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount instanceof GoldAccount).toBe(true);
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -19,7 +19,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getBalance()).toBe(1100);
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -31,7 +31,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -43,7 +43,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -55,7 +55,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getAgency()).toBe('0001');
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -69,7 +69,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getAgency()).toBe('0001');
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -79,7 +79,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(() => goldAccount.createAccount("12345", "0001", 500, 4000)).toThrow("Renda incompatível com o tipo de conta");
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -90,7 +90,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(() => goldAccount.createAccount("1234", "0001", 6000, 7000)).toThrow("Dados inválidos para cadastro");
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -101,7 +101,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.pixKeys.cpf).toBe("37761514046");
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -112,7 +112,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.pixKeys.email).toBe("teste@reprograma.com.br");
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -122,7 +122,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -132,7 +132,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(() => goldAccount.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   });
 
@@ -145,7 +145,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getBalance()).toBe(5900);
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
 
   })
 
@@ -158,7 +158,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getBalance()).toBe(6000);
     
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
   })
 
   test("sacar '-100' reais da conta", () => {
@@ -170,7 +170,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getBalance()).toBe(6000);
 
     // remover da lista de instâncias
-    goldAccount.destroy()
+    goldAccount.removeAccount()
   })
 
   test("fazer pix com valor válido, saldo suficiente e chave válida", () => {
@@ -188,8 +188,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(900);
     
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo suficiente, chave válida porém ultrapassando o limite", () => {
@@ -207,8 +207,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(5500);
     
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo suficiente e chave inválida", () => {
@@ -226,8 +226,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(1000);
 
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer pix com valor válido, saldo insuficiente e chave válida", () => {
@@ -245,8 +245,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(4000);
 
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer pix com valor inválido, saldo suficiente e chave válida", () => {
@@ -264,8 +264,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente e dados válidos", () => {
@@ -281,8 +281,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6100);
     
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente e dados inválidos", () => {
@@ -298,8 +298,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(7000);
 
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo suficiente, dados válidos porém ultrapassando o limite", () => {
@@ -315,8 +315,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(7000);
 
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer transferência com valor válido, saldo insuficiente e dados válidos", () => {
@@ -332,8 +332,8 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(4000);
 
     // remover da lista de instâncias
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 
   test("fazer transferência com valor inválido, saldo suficiente e dados válidos", () => {
@@ -348,7 +348,7 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(1000);
 
-    fromgoldAccount.destroy();
-    togoldAccount.destroy();
+    fromgoldAccount.removeAccount();
+    togoldAccount.removeAccount();
   })
 });

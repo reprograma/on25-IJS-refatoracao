@@ -1,11 +1,10 @@
 class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
   accountNumber;
   agency;
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static getAllAccounts = []; 
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
@@ -16,14 +15,15 @@ class Account {
       email: undefined,
       telefone: undefined
     }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    Account.getAllAccounts.push(this);
+    return "Conta criada com sucesso";
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
-  destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
-  }
+
+  removeAccount() {
+    let i = Account.getAllAccounts.indexOf(this);
+    Account.getAllAccounts.splice(i, 1);
+  };
 
   createAccount(accountNumber, agency, balance) {
     if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
@@ -34,45 +34,43 @@ class Account {
     } else {
       throw new Error("Dados inválidos para cadastro");
     }
-  }
+  };
 
   getBalance() {
     return this.balance;
-  }
+  };
 
   getAgency() {
     return this.agency;
-  }
+  };
 
   getAccountNumber() {
     return this.accountNumber;
-  }
+  };
 
   setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
-    return this.accountNumber
-  }
+    this.accountNumber = accountNumber;
+  };
 
   setAgency(agency) {
-    this.agency = agency
-    return this.agency
-  }
+    this.agency = agency;
+  };
 
   setBalance(value) {
     this.balance += value;
-    return this.balance;
+
   }
 
   deposit(value) {
     if (typeof value === 'string' || typeof value === 'boolean') {
       throw new Error("Não é possível depositar valores não numéricos");
-    }
+    };
     if (value > 0) {
       this.balance += value;
     } else {
       throw new Error("Não é possível depositar valores negativos");
     }
-  }
+  };
 
   createPixKey(keyValue, keyType) {
     switch (keyType) {
@@ -110,7 +108,7 @@ class Account {
       default:
         return "Tipo de chave inexistente";
     }
-  }
+  };
 
   withdraw(value) {
     if (value > 0 && typeof value === 'number') {
@@ -123,22 +121,22 @@ class Account {
     } else {
       throw new Error("Valor inválido de saque");
     }
-  }
+  };
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.getAllAccounts.find(account => {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
-    })
+    });
 
     if (!validAccount) {
       throw new Error("Conta não encontrada")
-    }
+    };
 
     if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    }
+    };
 
     if (this.balance - value > 0) {
       validAccount.setBalance(value);
@@ -147,20 +145,20 @@ class Account {
     } else {
       throw new Error("Você não possui saldo suficiente");
     }
-  }
+  };
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.getAllAccounts.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
 
     if (!validAccount) {
       throw new Error("Chave pix não encontrada")
-    }
+    };
 
     if (value < 0) {
       throw new Error("Valor inválido de pix");
-    }
+    };
 
     if (this.balance - value > 0) {
       this.balance -= value;
@@ -170,6 +168,6 @@ class Account {
       throw new Error("Você não possui saldo suficiente");
     }
   }
-}
+};
 
 export default Account;

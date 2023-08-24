@@ -12,6 +12,8 @@ class GoldAccount extends Account {
     if (income < 5000 || income > 17999.99) {
       throw new Error("Renda incompatível com o tipo de conta")
     }
+
+    //super.createAccount(accountNumber, agency, balance)
     if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
       this.accountNumber=accountNumber;
       this.agency=agency;
@@ -24,7 +26,7 @@ class GoldAccount extends Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.getAllAccounts.find(account => {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency; 
@@ -52,7 +54,7 @@ class GoldAccount extends Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.getAllAccounts.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
   

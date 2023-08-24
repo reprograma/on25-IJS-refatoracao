@@ -23,7 +23,7 @@ class StandardAccount extends Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.getAllAccounts.find(account => {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency; 
@@ -51,7 +51,7 @@ class StandardAccount extends Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.getAllAccounts.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
   
