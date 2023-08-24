@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(192, 204, 211);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  height: 500px;
+  border: 1px solid black;
+}
+.containerMenu {
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.containerBaloon {
+  display: flex;
+  align-items: center;
+}
+
+#baloesInteiros,
+#baloesEstourados {
+  font-size: 40px;
+}
+.containerCronometro {
+  width: 140px;
+  height: 132px;
+  background-image: url(../imagens/cronometro.png);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cronometro {
+  color: red;
+  font-size: 30px;
+}
+
+.containerScene {
+  flex: 1;
+  background-image: url(../imagens/cenario.png);
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+#cenario {
+  width: auto;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
