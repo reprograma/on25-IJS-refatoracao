@@ -1,5 +1,5 @@
 import StandardAccount from "./StandardAccount.js";
-
+// modifiquei o método destroy p/removeAccountFromArrayAllAccounts()
 describe("Teste da classe StandardAccount", () => {
   test("verificar se instancia de StandardAccount é feita corretamente", () => {
     const standardAccount = new StandardAccount();

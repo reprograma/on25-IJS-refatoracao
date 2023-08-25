@@ -1,5 +1,5 @@
 import PremiumAccount from "./PremiumAccount.js";
-
+// modifiquei o método destroy p/removeAccountFromArrayAllAccounts()
 describe("Teste da classe premiumAccount", () => {
   test("verificar se instancia de premiumAccount é feita corretamente", () => {
     const premiumAccount = new PremiumAccount();
