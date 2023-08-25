@@ -1,11 +1,13 @@
 class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
   accountNumber;
   agency;
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  numberLength;
+  
+  static regex;
+  static allAccounts = [];
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
@@ -16,17 +18,38 @@ class Account {
       email: undefined,
       telefone: undefined
     }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    this.numberLength = {
+      account: 5,
+      agency: 4
+    },
+    Account.regex = {
+      cep: /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/,
+      email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      phone: /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
+    }
+    Account.allAccounts.push(this);
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
+  //evita problemas de memória
   destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    let i = Account.allAccounts.indexOf(this);
+    Account.allAccounts.splice(i, 1);
+  }
+
+  validatesAccount() {
+    if (
+      accountNumber.length === this.numberLength.account &&
+      agency.length === this.numberLength.agency &&
+      balance > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   createAccount(accountNumber, agency, balance) {
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
+    if (this.validatesAccount()) {
       this.accountNumber = accountNumber;
       this.agency = agency;
       this.balance = balance;
@@ -72,14 +95,15 @@ class Account {
     } else {
       throw new Error("Não é possível depositar valores negativos");
     }
-  }
+  }  
 
   createPixKey(keyValue, keyType) {
+
+    keyType = keyType.toUpperCase();
+
     switch (keyType) {
       case "CPF":
-        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
-
-        if (regex.test(keyValue)) {
+        if (Account.regex.cpf.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
         }
@@ -87,9 +111,7 @@ class Account {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
-        let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-        if (emailRegex.test(keyValue)) {
+        if (Account.regex.email.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
         }
@@ -97,10 +119,7 @@ class Account {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
-        let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-
-        if (phoneRegex.test(keyValue)) {
+        if (Account.regex.phone.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
         }
@@ -126,7 +145,7 @@ class Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAccounts.find(account => {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
@@ -150,7 +169,7 @@ class Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAccounts.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
 

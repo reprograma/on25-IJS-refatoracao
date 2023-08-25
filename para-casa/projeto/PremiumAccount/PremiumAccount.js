@@ -2,7 +2,7 @@ import Account from "../Account/Account";
 
 class PremiumAccount extends Account {
   transactionLimit;
-  
+
   constructor() {
     super();
   }
@@ -11,9 +11,9 @@ class PremiumAccount extends Account {
     if (income < 18000) {
       throw new Error("Renda incompatível com o tipo de conta")
     }
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.accountNumber=accountNumber;
-      this.agency=agency;
+    if (this.validatesAccount()) {
+      this.accountNumber = accountNumber;
+      this.agency = agency;
       this.balance = balance;
       this.income = income;
       return "Conta criada com sucesso";
@@ -23,14 +23,14 @@ class PremiumAccount extends Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAccounts.find(account => {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
-      return accNumber === accountNumber && accAgency === agency; 
+      return accNumber === accountNumber && accAgency === agency;
     })
 
     if (!validAccount) {
-      throw new Error ("Conta não encontrada")
+      throw new Error("Conta não encontrada")
     }
 
     if (value < 0) {
@@ -47,12 +47,12 @@ class PremiumAccount extends Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAccounts.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
-  
+
     if (!validAccount) {
-      throw new Error ("Chave pix não encontrada")
+      throw new Error("Chave pix não encontrada")
     }
 
     if (value < 0) {
