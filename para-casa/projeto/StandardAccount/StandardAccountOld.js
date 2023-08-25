@@ -24,16 +24,24 @@ class StandardAccount extends Account {
 
   transfer(value, accountNumber, agency) {
     const validAccount = Account.all.find(account => {
-      return account.getAccountNumber() === accountNumber && account.getAgency() === agency;
-  })
+      let accNumber = account.getAccountNumber();
+      let accAgency = account.getAgency();
+      return accNumber === accountNumber && accAgency === agency; 
+    })
 
     if (!validAccount) {
       throw new Error ("Conta não encontrada")
-    } else if (value > this.transactionLimit) {
+    }
+
+    if (value > this.transactionLimit) {
       throw new Error ("O seu limite de transação é de 1000 reais")
-    } else if (value < 0) {
+    }
+
+    if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    } else if (this.balance - value > 0) {
+    }
+
+    if (this.balance - value > 0) {
       validAccount.setBalance(value);
       this.balance -= value;
       return "Transferência feita com sucesso";
@@ -49,11 +57,17 @@ class StandardAccount extends Account {
   
     if (!validAccount) {
       throw new Error ("Chave pix não encontrada")
-    } else if (value > this.transactionLimit) {
+    }
+
+    if (value > this.transactionLimit) {
       throw new Error ("O seu limite de transação é de 1000 reais")
-    } else if (value < 0) {
+    }
+
+    if (value < 0) {
       throw new Error("Valor inválido de pix");
-    } else if (this.balance - value > 0) {
+    }
+
+    if (this.balance - value > 0) {
       this.balance -= value;
       validAccount.setBalance(value);
       return "Pix feito com sucesso";
