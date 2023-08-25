@@ -25,24 +25,16 @@ class GoldAccount extends Account {
 
   transfer(value, accountNumber, agency) {
     const validAccount = Account.all.find(account => {
-      let accNumber = account.getAccountNumber();
-      let accAgency = account.getAgency();
-      return accNumber === accountNumber && accAgency === agency; 
-    })
+      return account.getAccountNumber() === accountNumber && account.getAgency() === agency;
+  })
 
     if (!validAccount) {
       throw new Error ("Conta não encontrada")
-    }
-
-    if (value > this.transactionLimit) {
+    } else if (value > this.transactionLimit) {
       throw new Error ("O seu limite de transação é de 1000 reais")
-    }
-
-    if (value < 0) {
+    } else if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    }
-
-    if (this.balance - value > 0) {
+    } else if (this.balance - value > 0) {
       validAccount.setBalance(value);
       this.balance -= value;
       return "Transferência feita com sucesso";
@@ -58,17 +50,11 @@ class GoldAccount extends Account {
   
     if (!validAccount) {
       throw new Error ("Chave pix não encontrada")
-    }
-
-    if (value > this.transactionLimit) {
+    } else if (value > this.transactionLimit) {
       throw new Error ("O seu limite de transação é de 1000 reais")
-    }
-
-    if (value < 0) {
+    } else if (value < 0) {
       throw new Error("Valor inválido de pix");
-    }
-
-    if (this.balance - value > 0) {
+    } else if (this.balance - value > 0) {
       this.balance -= value;
       validAccount.setBalance(value);
       return "Pix feito com sucesso";
