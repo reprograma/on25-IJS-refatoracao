@@ -1,5 +1,5 @@
 import GoldAccount from "./GoldAccount.js";
-
+// modifiquei o método destroy p/removeAccountFromArrayAllAccounts()
 describe("Teste da classe GoldAccount", () => {
   test("verificar se instancia de GoldAccount é feita corretamente", () => {
     const goldAccount = new GoldAccount();

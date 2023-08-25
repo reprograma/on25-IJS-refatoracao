@@ -1,4 +1,5 @@
 import Account from "./Account.js";
+// modifiquei o método destroy p/removeAccountFromArrayAllAccounts()
 
 describe("Teste da classe Account", () => {
   test("verificar se instancia de Account é feita corretamente", () => {

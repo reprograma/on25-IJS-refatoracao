@@ -5,7 +5,7 @@ class Account {
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static allAcounts = []; 
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
@@ -15,14 +15,14 @@ class Account {
       cpf: undefined,
       email: undefined,
       telefone: undefined
-    }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
-  }
+    };
+    Account.allAccounts.push(this); 
+  };
 
   // método para remover uma conta da lista e evitar que problemas de memória
-  destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+  removeAccountFromArrayAllAccounts() {
+    let i = Account.allAccounts.indexOf(this);
+    Account.allAccounts.splice(i, 1);
   }
 
   createAccount(accountNumber, agency, balance) {
@@ -34,34 +34,34 @@ class Account {
     } else {
       throw new Error("Dados inválidos para cadastro");
     }
-  }
+  };
 
   getBalance() {
     return this.balance;
-  }
+  };
 
   getAgency() {
     return this.agency;
-  }
+  };
 
   getAccountNumber() {
     return this.accountNumber;
-  }
+  };
 
   setAccountNumber(accountNumber) {
     this.accountNumber = accountNumber
     return this.accountNumber
-  }
+  };
 
   setAgency(agency) {
     this.agency = agency
     return this.agency
-  }
+  };
 
   setBalance(value) {
     this.balance += value;
     return this.balance;
-  }
+  };
 
   deposit(value) {
     if (typeof value === 'string' || typeof value === 'boolean') {
@@ -72,7 +72,7 @@ class Account {
     } else {
       throw new Error("Não é possível depositar valores negativos");
     }
-  }
+  };
 
   createPixKey(keyValue, keyType) {
     switch (keyType) {
@@ -81,10 +81,10 @@ class Account {
 
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
-          return "Chave pix cpf criada com sucesso";
+          return "Chave pix CPF criada com sucesso";
         }
         else {
-          throw new Error("Erro, cpf inválido");
+          throw new Error("Erro, CPF inválido");
         }
       case "EMAIL":
         let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -109,8 +109,8 @@ class Account {
         }
       default:
         return "Tipo de chave inexistente";
-    }
-  }
+    };
+  };
 
   withdraw(value) {
     if (value > 0 && typeof value === 'number') {
@@ -126,7 +126,7 @@ class Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAccounts.find(account => {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
@@ -150,7 +150,7 @@ class Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAccounts.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
 
