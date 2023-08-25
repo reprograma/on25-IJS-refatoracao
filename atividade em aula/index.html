@@ -1,35 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Estourando balões</title>
+	<link rel="stylesheet" href="style.css">
 
-	<head>
-			<meta charset="utf-8" />
-		<title>estourando baloes</title>
-		<script language='javascript'>
+</head>
 
-function iniciaJogo(){
-	var nivel_jogo = document.getElementById('nivel_jogo').value;
-window.location.href = 'jogo.html?'+nivel_jogo;
-}
-
-		</script>
-	</head>
-
-	<body>
-
-<div>
-	<p>
-		<b>nivel:</b>
-		<select id="nivel_jogo">
-			<option value="1">Facil</option>
-			<option value="2">normal</option>
-			<option value="3">dificil</option>
-		</select>
-	</p>
-	<br />
-	<img src="imagens/iniciar.png" onclick="iniciaJogo()" />
-</div>
-
-	</body>
+<body>
+	<div>
+		<p>
+			<strong>nivel:</strong>
+			<select id="nivel_jogo">
+				<option value="1">Facil</option>
+				<option value="2">normal</option>
+				<option value="3">dificil</option>
+			</select>
+		</p>
+		<img src="imagens/iniciar.png" onclick="iniciaJogo()" />
+	</div>
+	<script src="index.js"></script>
+	<script src="jogo.js"></script>
+</body>
 
 </html>

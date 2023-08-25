@@ -2,18 +2,20 @@ import Account from "../Account/Account";
 
 class StandardAccount extends Account {
   transactionLimit;
-
+  
   constructor() {
     super();
     this.transactionLimit = 1000;
   }
 
   createAccount(accountNumber, agency, balance, income) {
-    super.createAccount(accountNumber, agency, balance);
     if (income > 4999) {
       throw new Error("Renda incompatível com o tipo de conta")
-    } else if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.income = income;
+    }
+    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
+      this.accountNumber=accountNumber;
+      this.agency=agency;
+      this.balance=balance;
       return "Conta criada com sucesso";
     } else {
       throw new Error("Dados inválidos para cadastro");
@@ -26,13 +28,20 @@ class StandardAccount extends Account {
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency; 
     })
+
     if (!validAccount) {
       throw new Error ("Conta não encontrada")
-    }else if (value > this.transactionLimit) {
+    }
+
+    if (value > this.transactionLimit) {
       throw new Error ("O seu limite de transação é de 1000 reais")
-    }else if (value < 0) {
+    }
+
+    if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    }else if (this.balance - value > 0) {
+    }
+
+    if (this.balance - value > 0) {
       validAccount.setBalance(value);
       this.balance -= value;
       return "Transferência feita com sucesso";
@@ -45,23 +54,27 @@ class StandardAccount extends Account {
     const validAccount = Account.all.find(account => {
       return account.pixKeys[keyType] === pixKey;
     })
-    
+  
     if (!validAccount) {
       throw new Error ("Chave pix não encontrada")
-    }else if (value > this.transactionLimit) {
+    }
+
+    if (value > this.transactionLimit) {
       throw new Error ("O seu limite de transação é de 1000 reais")
-    }else if (value < 0) {
+    }
+
+    if (value < 0) {
       throw new Error("Valor inválido de pix");
-    }else if (this.balance - value > 0) {
+    }
+
+    if (this.balance - value > 0) {
       this.balance -= value;
       validAccount.setBalance(value);
       return "Pix feito com sucesso";
     } else {
       throw new Error("Você não possui saldo suficiente");
     }
-  } 
-
   }
-
+}
 
 export default StandardAccount;
