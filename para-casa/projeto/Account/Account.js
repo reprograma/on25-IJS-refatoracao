@@ -1,32 +1,31 @@
+import PixManager from "./PixManager.js";
+
 class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
   accountNumber;
   agency;
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static all = []; 
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
     this.agency = agency;
     this.balance = balance;
-    this.pixKeys = {
-      cpf: undefined,
-      email: undefined,
-      telefone: undefined
-    }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    this.PixManager = new PixManager(this)
+    Account.all.push(this); 
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
+
   destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    let accountData = Account.all.indexOf(this);
+    Account.all.splice(accountData, 1);
   }
-
+  
   createAccount(accountNumber, agency, balance) {
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
+    const ACCOUNT_NUMBER_LENGTH = 5;
+    const AGENCY_NUMBER_LENGTH = 4;  
+    if (ACCOUNT_NUMBER_LENGTH && AGENCY_NUMBER_LENGTH && balance > 0) {
       this.accountNumber = accountNumber;
       this.agency = agency;
       this.balance = balance;
@@ -63,53 +62,14 @@ class Account {
     return this.balance;
   }
 
-  deposit(value) {
-    if (typeof value === 'string' || typeof value === 'boolean') {
+  deposit(amount) {
+    if (typeof amount !== 'number') {
       throw new Error("Não é possível depositar valores não numéricos");
     }
-    if (value > 0) {
-      this.balance += value;
-    } else {
+    if (amount < 0) {
       throw new Error("Não é possível depositar valores negativos");
-    }
-  }
-
-  createPixKey(keyValue, keyType) {
-    switch (keyType) {
-      case "CPF":
-        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
-
-        if (regex.test(keyValue)) {
-          this.pixKeys.cpf = keyValue;
-          return "Chave pix cpf criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, cpf inválido");
-        }
-      case "EMAIL":
-        let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-        if (emailRegex.test(keyValue)) {
-          this.pixKeys.email = keyValue;
-          return "Chave pix email criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, email inválido");
-        }
-      case "TELEFONE":
-        let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-
-        if (phoneRegex.test(keyValue)) {
-          this.pixKeys.telefone = keyValue;
-          return "Chave pix telefone criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, telefone inválido");
-        }
-      default:
-        return "Tipo de chave inexistente";
-    }
+    } 
+    this.balance += amount;
   }
 
   withdraw(value) {
@@ -149,27 +109,14 @@ class Account {
     }
   }
 
-  pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
-      return account.pixKeys[keyType] === pixKey;
-    })
-
-    if (!validAccount) {
-      throw new Error("Chave pix não encontrada")
-    }
-
-    if (value < 0) {
-      throw new Error("Valor inválido de pix");
-    }
-
-    if (this.balance - value > 0) {
-      this.balance -= value;
-      validAccount.setBalance(value);
-      return "Pix feito com sucesso";
-    } else {
-      throw new Error("Você não possui saldo suficiente");
-    }
+  createPixKey(keyValue, keyType) {
+    return this.PixManager.createPixKey(keyValue, keyType);
   }
+
 }
 
+
+
 export default Account;
+
+
