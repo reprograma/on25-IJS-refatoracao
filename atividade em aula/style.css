@@ -1,0 +1,40 @@
+body {
+    display: flex;
+}
+
+.container {
+    width:auto;
+    height:500px;
+    background:#fff;
+    border: solid 1px #a2a2a2
+}
+
+.tabela {
+    border: nome;
+}
+
+.imgCronometro {
+    background: url('imagens/cronometro.png');
+    text-align: center;
+}
+
+.numCronometro {
+    color:red;
+    font-size: 30px;
+}
+
+.tabela {
+    width: 140px; 
+    height: 132px;
+}
+
+.baloes {
+    font-size: 40px;
+}
+
+.cenario {
+    width: 600px;
+    height: 500px;
+    background:url('imagens/cenario.png');
+    background-position: bottom;
+}
