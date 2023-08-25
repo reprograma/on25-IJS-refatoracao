@@ -1,22 +1,20 @@
-import Account from '../Account/Account.js';
-import Client from './Client.js';
+const {Client} = require("./Client")
 
-describe("Teste da classe Client", () => {
-  test("verificar se instancia do Client é feita corretamente", () => {
-    const client = new Client();
-    // instanciaASerVerificada instanceof Classe -> true ou false
-    // alternativa: expect(client).toBeInstanceOf(Client);
-    expect(client instanceof Client).toBe(true);
-  });
+describe("Testes de clientes", () => {
 
-  test("cadastrar cliente com dados válidos", () => {
-    const client = new Client();
-    const account = new Account();
-    expect(client.registerClient("Ana", "1234567908", account, 5000)).toBe("Cliente cadastrado");
-  });
+    it("deve retornar conta do tipo 'standard'", () => {
+        const testeCliente = new Client(1, "Maria", 1234567890, 1000)
+        expect(testeCliente.accountType).toEqual("standard");
+    });
 
-  test("cadastrar cliente com dados inválidos", () => {
-    const client = new Client();
-    expect(() => client.registerClient("Ana", "1234567908", "não conta", 5000)).toThrow("Erro no cadastro, dados inválidos");
-  });
-});
+    it("deve retornar conta do tipo 'gold'", () => {
+        const testeCliente = new Client(2, "Joao", 2345678901, 6000)
+        expect(testeCliente.accountType).toEqual("gold");
+    });
+
+    it("deve retornar conta do tipo 'premium'", () => {
+        const testeCliente = new Client(3, "Paulo", 3456789012, 20000)
+        expect(testeCliente.accountType).toEqual("premium");
+    });
+
+})
