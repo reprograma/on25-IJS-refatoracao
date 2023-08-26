@@ -7,9 +7,8 @@
     "test": "jest"
   },
   "type": "module",
-  "author": "",
+  "author": "Elvira Bruno",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/plugin-transform-modules-commonjs": "^7.19.6",

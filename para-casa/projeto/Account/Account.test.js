@@ -5,7 +5,6 @@ describe("Teste da classe Account", () => {
     const account = new Account();
     expect(account instanceof Account).toBe(true);
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -17,7 +16,6 @@ describe("Teste da classe Account", () => {
 
     expect(account.getBalance()).toBe(1100);
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -28,7 +26,6 @@ describe("Teste da classe Account", () => {
     expect(() => account.deposit(-100)).toThrow("Não é possível depositar valores negativos");
     expect(account.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -39,7 +36,6 @@ describe("Teste da classe Account", () => {
     expect(() => account.deposit("")).toThrow("Não é possível depositar valores não numéricos");
     expect(account.getBalance()).toBe(500);
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -50,7 +46,6 @@ describe("Teste da classe Account", () => {
     expect(account.getAccountNumber()).toBe('12345');
     expect(account.getAgency()).toBe('0001');
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -64,7 +59,6 @@ describe("Teste da classe Account", () => {
     expect(account.getAccountNumber()).toBe('12345');
     expect(account.getAgency()).toBe('0001');
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -74,7 +68,6 @@ describe("Teste da classe Account", () => {
     const account = new Account();
     expect(() => account.createAccount("1234", "0001", 300)).toThrow("Dados inválidos para cadastro");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -85,7 +78,6 @@ describe("Teste da classe Account", () => {
     expect(account.createPixKey("37761514046", "CPF")).toBe("Chave pix cpf criada com sucesso");
     expect(account.pixKeys.cpf).toBe("37761514046");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -96,7 +88,6 @@ describe("Teste da classe Account", () => {
     expect(account.createPixKey("teste@reprograma.com.br", "EMAIL")).toBe("Chave pix email criada com sucesso");
     expect(account.pixKeys.email).toBe("teste@reprograma.com.br");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -106,7 +97,6 @@ describe("Teste da classe Account", () => {
     const account = new Account();
     expect(account.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -116,7 +106,6 @@ describe("Teste da classe Account", () => {
     const account = new Account();
     expect(() => account.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
     
-    // remover da lista de instâncias
     account.destroy()
 
   });
@@ -129,7 +118,6 @@ describe("Teste da classe Account", () => {
     account.withdraw(100)
     expect(account.getBalance()).toBe(400);
     
-    // remover da lista de instâncias
     account.destroy()
 
   })
@@ -142,7 +130,6 @@ describe("Teste da classe Account", () => {
     expect(() => account.withdraw(-100)).toThrow("Valor inválido de saque")
     expect(account.getBalance()).toBe(500);
     
-    // remover da lista de instâncias
     account.destroy()
   })
 
@@ -154,7 +141,6 @@ describe("Teste da classe Account", () => {
     expect(() => account.withdraw('-100')).toThrow("Valor inválido de saque")
     expect(account.getBalance()).toBe(500);
 
-    // remover da lista de instâncias
     account.destroy()
   })
 
@@ -172,7 +158,6 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(510);
     expect(fromAccount.getBalance()).toBe(990);
     
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })
@@ -191,7 +176,6 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(500);
     expect(fromAccount.getBalance()).toBe(1000);
 
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })
@@ -210,7 +194,6 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(500);
     expect(fromAccount.getBalance()).toBe(200);
 
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })
@@ -229,7 +212,6 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(500);
     expect(fromAccount.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })
@@ -246,7 +228,6 @@ describe("Teste da classe Account", () => {
     expect(fromAccount.getBalance()).toBe(290);
     expect(toAccount.getBalance()).toBe(510);
     
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })
@@ -263,7 +244,6 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(500);
     expect(fromAccount.getBalance()).toBe(1000);
 
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })
@@ -280,7 +260,6 @@ describe("Teste da classe Account", () => {
     expect(toAccount.getBalance()).toBe(500);
     expect(fromAccount.getBalance()).toBe(200);
 
-    // remover da lista de instâncias
     fromAccount.destroy();
     toAccount.destroy();
   })

@@ -32,3 +32,5 @@ Antes de começar, vamos organizar nosso setup.
 <p align="center">
 Desenvolvido com :purple_heart:  
 </p>
+https://www.innofied.com/javascript-coding-standards-follow/
+https://muddy-estimate-da7.notion.site/Refatora-o-72ba26c21eb34b6cb2d120abdd464e98
