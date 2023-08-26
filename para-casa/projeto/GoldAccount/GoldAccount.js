@@ -1,4 +1,4 @@
-import Account from "../Account/Account";
+/*import Account from "../Account/Account";
 
 class GoldAccount extends Account {
   transactionLimit;
@@ -78,4 +78,4 @@ class GoldAccount extends Account {
   }
 }
 
-export default GoldAccount;
+export default GoldAccount; */
