@@ -5,7 +5,6 @@ describe("Teste da classe GoldAccount", () => {
     const goldAccount = new GoldAccount();
     expect(goldAccount instanceof GoldAccount).toBe(true);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -18,7 +17,6 @@ describe("Teste da classe GoldAccount", () => {
 
     expect(goldAccount.getBalance()).toBe(1100);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -30,19 +28,16 @@ describe("Teste da classe GoldAccount", () => {
     expect(() => goldAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
     expect(goldAccount.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
 
-  // negativo -> deposito com valor não numérico
   test("deposito com valor não númérico", () => {
     const goldAccount = new GoldAccount();
     goldAccount.createAccount('12345', '0001', 1000, 6000);
     expect(() => goldAccount.deposit("")).toThrow("Não é possível depositar valores não numéricos");
     expect(goldAccount.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -54,7 +49,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getAccountNumber()).toBe('12345');
     expect(goldAccount.getAgency()).toBe('0001');
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -68,7 +62,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.getAccountNumber()).toBe('12345');
     expect(goldAccount.getAgency()).toBe('0001');
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -78,18 +71,15 @@ describe("Teste da classe GoldAccount", () => {
     const goldAccount = new GoldAccount();
     expect(() => goldAccount.createAccount("12345", "0001", 500, 4000)).toThrow("Renda incompatível com o tipo de conta");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
-
 
   // caso negativo -> algum dado inválido
   test("criar conta com dados inválidos", () => {
     const goldAccount = new GoldAccount();
     expect(() => goldAccount.createAccount("1234", "0001", 6000, 7000)).toThrow("Dados inválidos para cadastro");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -100,7 +90,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.createPixKey("37761514046", "CPF")).toBe("Chave pix cpf criada com sucesso");
     expect(goldAccount.pixKeys.cpf).toBe("37761514046");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -111,7 +100,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(goldAccount.createPixKey("teste@reprograma.com.br", "EMAIL")).toBe("Chave pix email criada com sucesso");
     expect(goldAccount.pixKeys.email).toBe("teste@reprograma.com.br");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -121,7 +109,6 @@ describe("Teste da classe GoldAccount", () => {
     const goldAccount = new GoldAccount();
     expect(goldAccount.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -131,7 +118,6 @@ describe("Teste da classe GoldAccount", () => {
     const goldAccount = new GoldAccount();
     expect(() => goldAccount.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   });
@@ -144,7 +130,6 @@ describe("Teste da classe GoldAccount", () => {
     goldAccount.withdraw(100)
     expect(goldAccount.getBalance()).toBe(5900);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
 
   })
@@ -157,7 +142,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(() => goldAccount.withdraw(-100)).toThrow("Valor inválido de saque")
     expect(goldAccount.getBalance()).toBe(6000);
     
-    // remover da lista de instâncias
     goldAccount.destroy()
   })
 
@@ -169,7 +153,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(() => goldAccount.withdraw('-100')).toThrow("Valor inválido de saque")
     expect(goldAccount.getBalance()).toBe(6000);
 
-    // remover da lista de instâncias
     goldAccount.destroy()
   })
 
@@ -187,7 +170,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6100);
     expect(fromgoldAccount.getBalance()).toBe(900);
     
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -206,7 +188,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(5500);
     
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -225,7 +206,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(1000);
 
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -244,7 +224,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(4000);
 
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -263,7 +242,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(1000);
     
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -280,7 +258,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(fromgoldAccount.getBalance()).toBe(6900);
     expect(togoldAccount.getBalance()).toBe(6100);
     
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -297,7 +274,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(7000);
 
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -314,7 +290,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(7000);
 
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })
@@ -331,7 +306,6 @@ describe("Teste da classe GoldAccount", () => {
     expect(togoldAccount.getBalance()).toBe(6000);
     expect(fromgoldAccount.getBalance()).toBe(4000);
 
-    // remover da lista de instâncias
     fromgoldAccount.destroy();
     togoldAccount.destroy();
   })

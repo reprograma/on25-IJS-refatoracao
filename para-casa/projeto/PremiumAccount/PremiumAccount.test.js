@@ -5,7 +5,6 @@ describe("Teste da classe premiumAccount", () => {
     const premiumAccount = new PremiumAccount();
     expect(premiumAccount instanceof PremiumAccount).toBe(true);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -18,7 +17,6 @@ describe("Teste da classe premiumAccount", () => {
 
     expect(premiumAccount.getBalance()).toBe(10100);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -30,7 +28,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
     expect(premiumAccount.getBalance()).toBe(10000);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -42,7 +39,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.deposit("")).toThrow("Não é possível depositar valores não numéricos");
     expect(premiumAccount.getBalance()).toBe(10000);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -54,7 +50,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getAccountNumber()).toBe('12345');
     expect(premiumAccount.getAgency()).toBe('0001');
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -68,7 +63,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.getAccountNumber()).toBe('12345');
     expect(premiumAccount.getAgency()).toBe('0001');
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -78,7 +72,6 @@ describe("Teste da classe premiumAccount", () => {
     const premiumAccount = new PremiumAccount();
     expect(() => premiumAccount.createAccount("12345", "0001", 500, 4000)).toThrow("Renda incompatível com o tipo de conta");
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -89,7 +82,6 @@ describe("Teste da classe premiumAccount", () => {
     const premiumAccount = new PremiumAccount();
     expect(() => premiumAccount.createAccount("1234", "0001", 20000, 20000)).toThrow("Dados inválidos para cadastro");
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -100,7 +92,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.createPixKey("37761514046", "CPF")).toBe("Chave pix cpf criada com sucesso");
     expect(premiumAccount.pixKeys.cpf).toBe("37761514046");
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -111,7 +102,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(premiumAccount.createPixKey("teste@reprograma.com.br", "EMAIL")).toBe("Chave pix email criada com sucesso");
     expect(premiumAccount.pixKeys.email).toBe("teste@reprograma.com.br");
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -121,7 +111,6 @@ describe("Teste da classe premiumAccount", () => {
     const premiumAccount = new PremiumAccount();
     expect(premiumAccount.createPixKey("11912345678", "TELEFONE")).toBe("Chave pix telefone criada com sucesso");
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -131,7 +120,6 @@ describe("Teste da classe premiumAccount", () => {
     const premiumAccount = new PremiumAccount();
     expect(() => premiumAccount.createPixKey("3776", "CPF")).toThrow("Erro, cpf inválido");
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   });
@@ -144,7 +132,6 @@ describe("Teste da classe premiumAccount", () => {
     premiumAccount.withdraw(100)
     expect(premiumAccount.getBalance()).toBe(19900);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
 
   })
@@ -157,7 +144,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.withdraw(-100)).toThrow("Valor inválido de saque")
     expect(premiumAccount.getBalance()).toBe(20000);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
   })
 
@@ -169,7 +155,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(() => premiumAccount.withdraw('-100')).toThrow("Valor inválido de saque")
     expect(premiumAccount.getBalance()).toBe(20000);
 
-    // remover da lista de instâncias
     premiumAccount.destroy()
   })
 
@@ -187,7 +172,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20100);
     expect(frompremiumAccount.getBalance()).toBe(9900);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
@@ -206,7 +190,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20000);
     expect(frompremiumAccount.getBalance()).toBe(10000);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
@@ -225,7 +208,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20000);
     expect(frompremiumAccount.getBalance()).toBe(4000);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
@@ -244,7 +226,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20000);
     expect(frompremiumAccount.getBalance()).toBe(10000);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
@@ -261,7 +242,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(frompremiumAccount.getBalance()).toBe(6000);
     expect(topremiumAccount.getBalance()).toBe(21000);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
@@ -278,7 +258,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20000);
     expect(frompremiumAccount.getBalance()).toBe(7000);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
@@ -295,7 +274,6 @@ describe("Teste da classe premiumAccount", () => {
     expect(topremiumAccount.getBalance()).toBe(20000);
     expect(frompremiumAccount.getBalance()).toBe(4000);
 
-    // remover da lista de instâncias
     frompremiumAccount.destroy();
     topremiumAccount.destroy();
   })
