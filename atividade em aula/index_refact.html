@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Estourando balões</title>
+	</head>
+
+	<body>
+
+		<div>
+			<p style="margin-bottom: 10px;">
+				<strong>Nível:</strong>
+				<select id="nivelJogo">
+					<option value="1">Fácil</option>
+					<option value="2">Normal</option>
+					<option value="3">Difícil</option>
+				</select>
+			</p>
+			<img src="imagens/iniciar.png" onclick="iniciarJogo()" />
+		</div>
+	
+		<script>
+			function iniciarJogo(){
+				let nivelJogo = document.getElementById('nivelJogo').value;
+				window.location.href = 'jogo_refact.html?'+nivelJogo;
+			}
+		</script>
+
+	</body>
+
+</html>
