@@ -1,10 +1,10 @@
-const {Account} = require('../Account/Account')
+const {Account} = require('../Account/Account');
 
 class GoldAccount extends Account {
-    limitTransaction;
+    limitTransaction; // max allowed transaction value
 
     constructor(accountNumber, agency, client) {
-        if(client.accountType == "gold") {
+        if(client.accountType === "gold") {
             super(accountNumber, agency, client);
             this.limitTransaction = 5000;
         } else {
@@ -15,4 +15,4 @@ class GoldAccount extends Account {
 
 }
 
-module.exports = {GoldAccount}
+module.exports = {GoldAccount};
