@@ -1,5 +1,5 @@
-import { Account } from "./Account/Account.js";
-import { Client } from "./Client/Client.js";
+import { Account } from "./Account.js";
+import { Client } from "./Client.js";
 
 const maria = new Client("maria", 12334455511, "maria@gmail.com", 999999999); //Client { name: 'maria' }
 const miguel = new Client("miguel", 12334455521, "miguel@gmail.com", 999699999);  //Client { name: 'miguel' }
