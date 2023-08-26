@@ -25,7 +25,7 @@ describe("Teste da classe Account", () => {
   // negativo -> deposito com valor negativo
   test("deposito com valor de -100", () => {
     const account = new Account(1, 1, 1000);
-    expect(() => account.deposit(-100)).toThrow("Não é possível depositar valores negativos");
+    expect(() => account.deposit(-100)).toThrow("Não é possível depositar valores não numéricos ou negativos");
     expect(account.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
@@ -36,7 +36,7 @@ describe("Teste da classe Account", () => {
   // negativo -> deposito com valor não numérico
   test("deposito com valor não númérico", () => {
     const account = new Account(1, 1, 500);
-    expect(() => account.deposit("")).toThrow("Não é possível depositar valores não numéricos");
+    expect(() => account.deposit("")).toThrow("Não é possível depositar valores não numéricos ou negativos");
     expect(account.getBalance()).toBe(500);
     
     // remover da lista de instâncias

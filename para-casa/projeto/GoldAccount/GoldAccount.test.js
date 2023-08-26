@@ -27,7 +27,7 @@ describe("Teste da classe GoldAccount", () => {
   test("deposito com valor de -100", () => {
     const goldAccount = new GoldAccount();
     goldAccount.createAccount('12345', '0001', 1000, 6000);
-    expect(() => goldAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
+    expect(() => goldAccount.deposit(-100)).toThrow("Não é possível depositar valores não numéricos ou negativos");
     expect(goldAccount.getBalance()).toBe(1000);
     
     // remover da lista de instâncias
