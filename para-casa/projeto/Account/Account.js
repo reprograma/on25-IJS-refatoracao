@@ -50,17 +50,14 @@ class Account {
 
   setAccountNumber(accountNumber) {
     this.accountNumber = accountNumber
-    return this.accountNumber
   }
 
   setAgency(agency) {
     this.agency = agency
-    return this.agency
   }
 
   setBalance(value) {
     this.balance += value;
-    return this.balance;
   }
 
   deposit(value) {
