@@ -6,7 +6,7 @@ class Client {
     #cpf;
     #phone;
     banks = [];
-    createPixKeys = []
+    static createPixKeys = []
 
     constructor(name, cpf, email, phone) {
         this.#phone = phone;
@@ -14,7 +14,7 @@ class Client {
         this.name = name;
         this.#cpf = cpf;
 
-        this.createPixKeys.push(
+        this.constructor.createPixKeys.push(
             {
                 cpf: this.#cpf,
                 email: this.email,
@@ -59,24 +59,23 @@ class Client {
         );
     }
 
-    accountIsRegistered(bank) {
-       
-        return (
-            this.banks.find((element) => element.bankCode === bank.bankCode) !== undefined)
+     accountIsRegistered(bank) {
+       const validateBank =this.banks.find((element) => element.bankCode === bank.bankCode) !== undefined
+        return console.log(
+            `Cliente do CPF ${this.cpf} já possui conta no banco ********* ${bank.bankName}`
+        ) , validateBank
 
 
     }
 
     addBank(bank) {
         if (!(bank instanceof Bank)) {
-            console.log('Informe um banco válido');
+            console.log('Informe um banco válido $$$$$$$$');
             return;
         }
 
         if (this.accountIsRegistered(bank)) {
-            console.log(
-                `Cliente do CPF ${this.cpf} já possui conta no banco ${bank.bankName}`
-            );
+         return
            
         }
 

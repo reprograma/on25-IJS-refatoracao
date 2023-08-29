@@ -16,7 +16,7 @@ class BankAccount {
 
   constructor(client, bank, accountNumber, agencyNumber, typeAccount) {
     if (!(client instanceof Client) && !(bank instanceof Bank)) {
-      return new Error("Informe um banco e cliente válido");
+      return new Error("Informe um banco e cliente válido ------");
     }
     // if (!(bank instanceof Bank)) {
     //   return new Error("Informe um banco válido");

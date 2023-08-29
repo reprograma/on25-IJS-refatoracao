@@ -1,7 +1,7 @@
 // Importações
 const { Bank } = require('./Bank');
-const { Client } = require('./ClientReafactor');
-const { BankAccount } = require('./BankAccount');
+const { Client } = require('./ClientRefactor');
+const { BankAccount } = require('./BankAccountCopy');
 const { StandardAccount} = require('./StandardAccount');
 const { GoldAccount} = require('./GoldAccount');
 const { PremiumAccount} = require('./PremiumAccount');
@@ -17,17 +17,17 @@ const client3 = new Client('Ada', 987654321);
 // // Associando clientes a bancos
 client1.addBank(bank1); // Banco 100 adicionado à cliente Luara.
 client1.addBank(bank1); // Cliente do CPF 123456789 já possui conta no banco Lua Bank.
-// client1.addBank(bank2); // Banco 200 adicionado à cliente Luara.
-// client1.removeBank(bank2); // Banco 200 removido da cliente Luara
-// client1.removeBank(bank2); // Cliente do CPF 123456789 não possui conta no banco Code Bank para ser removida.
+client1.addBank(bank2); // Banco 200 adicionado à cliente Luara.
+//client1.removeBank(bank2); // Banco 200 removido da cliente Luara
+//client1.removeBank(bank2); // Cliente do CPF 123456789 não possui conta no banco Code Bank para ser removida.
 
 client2.addBank(bank1); // Banco 100 adicionado à cliente Simone.
 client2.addBank(bank2); // Banco 200 adicionado à cliente Simone.
 
-// client3.addBank(bank1); // Banco 100 adicionado à cliente Ada.
-// client3.addBank(bank2); // Banco 200 adicionado à cliente Ada.
+client3.addBank(bank1); // Banco 100 adicionado à cliente Ada.
+client3.addBank(bank2); // Banco 200 adicionado à cliente Ada.
 
-// client3.addBank("Banco que não existe"); // Informe um banco válido.
+client3.addBank("Banco que não existe"); // Informe um banco válido.
 
 // // Conferindo bancos
 // console.log(Bank.createdBanks); // [ { bankCode: 100, qtdClients: 3 }, { bankCode: 200, qtdClients: 2 } ]
