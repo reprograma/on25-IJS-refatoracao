@@ -1,21 +1,17 @@
-function iniciaJogo(){
+function iniciaJogo() {
+let url = window.location.search,
+nivel_jogo = url.replace("?", ""),
+tempo_segundo = 0;
 
-var url = window.location.search;
-var nivel_jogo = url.replace("?", "");
+const qtdeBaloes = 80;
 
-var tempo_segundo = 0;
-if(nivel_jogo == 1){//1 facil -> 120 segs
+if(nivel_jogo === 1) {
     tempo_segundo = 120
-}
-
-if(nivel_jogo == 2){//2 facil -> 60 segs
+} else if(nivel_jogo === 2) {
     tempo_segundo = 60
+} else {
+  tempo_segundo = 30
 }
-
-if(nivel_jogo == 3){//3 dificil -> 30 segs
-    tempo_segundo = 30
-}
-
 document.getElementById('cronometro').innerHTML = tempo_segundo;//inserindo segundos no span
 var qtde_baloes = 80;
 //quantidade de baloes
@@ -35,7 +31,7 @@ contagem_tempo(tempo_segundo + 1)
 function contagem_tempo(segundos){
   segundos = segundos - 1;
 
-  if (segundos == -1) {
+  if (segundos === -1) {
     clearTimeout(timerId); // para a execucao da funcao settimeout
     game_over();
     return false;
@@ -96,7 +92,7 @@ situacao_jogo(baloes_inteiros);
 }
 
 function situacao_jogo(baloes_inteiros){
-  if (baloes_inteiros == 0) {
+  if (baloes_inteiros === 0) {
     alert('UUUUHFA ,aha você conseguiu!');
     parar_jogo();
 
