@@ -14,15 +14,15 @@ class Account {
     this.pixKeys = {
       cpf: undefined,
       email: undefined,
-      telefone: undefined
-    }
+      telefone: undefined,
+    };
     Account.all.push(this); // a cada instância é adicionada a lista estática de all
   }
 
   // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    let index = Account.all.indexOf(this);
+    Account.all.splice(index, 1);
   }
 
   createAccount(accountNumber, agency, balance) {
@@ -49,22 +49,19 @@ class Account {
   }
 
   setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
-    return this.accountNumber
+    this.accountNumber = accountNumber;
   }
 
   setAgency(agency) {
-    this.agency = agency
-    return this.agency
+    this.agency = agency;
   }
 
   setBalance(value) {
     this.balance += value;
-    return this.balance;
   }
 
   deposit(value) {
-    if (typeof value === 'string' || typeof value === 'boolean') {
+    if (typeof value !== "number") {
       throw new Error("Não é possível depositar valores não numéricos");
     }
     if (value > 0) {
@@ -77,34 +74,32 @@ class Account {
   createPixKey(keyValue, keyType) {
     switch (keyType) {
       case "CPF":
-        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+        const regex =
+          /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
 
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
-        let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
         if (emailRegex.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
-        let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
+        const phoneRegex =
+          /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
 
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, telefone inválido");
         }
       default:
@@ -113,7 +108,7 @@ class Account {
   }
 
   withdraw(value) {
-    if (value > 0 && typeof value === 'number') {
+    if (value > 0 && typeof value === "number") {
       if (this.balance - value > 0) {
         this.balance -= value;
         return value;
@@ -126,14 +121,14 @@ class Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
-      let accNumber = account.getAccountNumber();
-      let accAgency = account.getAgency();
+    const validAccount = Account.all.find((account) => {
+      const accNumber = account.getAccountNumber();
+      const accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
-    })
+    });
 
     if (!validAccount) {
-      throw new Error("Conta não encontrada")
+      throw new Error("Conta não encontrada");
     }
 
     if (value < 0) {
@@ -150,12 +145,12 @@ class Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.all.find((account) => {
       return account.pixKeys[keyType] === pixKey;
-    })
+    });
 
     if (!validAccount) {
-      throw new Error("Chave pix não encontrada")
+      throw new Error("Chave pix não encontrada");
     }
 
     if (value < 0) {
