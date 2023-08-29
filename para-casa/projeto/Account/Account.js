@@ -21,8 +21,8 @@ class Account {
 
   // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    let index = Account.all.indexOf(this);
+    Account.all.splice(index, 1);
   }
 
   createAccount(accountNumber, agency, balance) {
