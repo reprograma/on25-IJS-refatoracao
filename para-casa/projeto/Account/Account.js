@@ -61,7 +61,7 @@ class Account {
   }
 
   deposit(value) {
-    if (typeof value === 'string' || typeof value === 'boolean') {
+    if (typeof value !== "number") {
       throw new Error("Não é possível depositar valores não numéricos");
     }
     if (value > 0) {
