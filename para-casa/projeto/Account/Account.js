@@ -124,8 +124,8 @@ class Account {
 
   transfer(value, accountNumber, agency) {
     const validAccount = Account.all.find(account => {
-      let accNumber = account.getAccountNumber();
-      let accAgency = account.getAgency();
+      const accNumber = account.getAccountNumber();
+      const accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
     })
 
