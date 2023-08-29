@@ -77,8 +77,7 @@ class Account {
   createPixKey(keyValue, keyType) {
     switch (keyType) {
       case "CPF":
-        let regex =
-          /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
 
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
@@ -96,8 +95,7 @@ class Account {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
-        let phoneRegex =
-          /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+        let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
 
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
