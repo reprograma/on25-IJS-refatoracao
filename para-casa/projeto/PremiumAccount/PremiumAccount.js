@@ -9,9 +9,9 @@ class PremiumAccount extends Account {
 
   createAccount(accountNumber, agency, balance, income) {
     if (income < 18000) {
-      throw new Error("Renda incompatível com o tipo de conta")
+      throw new Error("Renda incompatível com o tipo de conta");
     }
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
+    else if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
       this.accountNumber=accountNumber;
       this.agency=agency;
       this.balance = balance;
@@ -31,13 +31,9 @@ class PremiumAccount extends Account {
 
     if (!validAccount) {
       throw new Error ("Conta não encontrada")
-    }
-
-    if (value < 0) {
+    } else if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    }
-
-    if (this.balance - value > 0) {
+    } else if (this.balance - value > 0) {
       validAccount.setBalance(value);
       this.balance -= value;
       return "Transferência feita com sucesso";
@@ -53,13 +49,9 @@ class PremiumAccount extends Account {
   
     if (!validAccount) {
       throw new Error ("Chave pix não encontrada")
-    }
-
-    if (value < 0) {
+    } else if (value < 0) {
       throw new Error("Valor inválido de pix");
-    }
-
-    if (this.balance - value > 0) {
+    } else if (this.balance - value > 0) {
       this.balance -= value;
       validAccount.setBalance(value);
       return "Pix feito com sucesso";

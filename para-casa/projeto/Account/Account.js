@@ -1,11 +1,10 @@
 class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
   accountNumber;
   agency;
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static all = [];
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
@@ -16,10 +15,9 @@ class Account {
       email: undefined,
       telefone: undefined
     }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    Account.all.push(this);
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
     let i = Account.all.indexOf(this);
     Account.all.splice(i, 1);
@@ -64,10 +62,10 @@ class Account {
   }
 
   deposit(value) {
-    if (typeof value === 'string' || typeof value === 'boolean') {
+    if (typeof value !== 'number') {
       throw new Error("Não é possível depositar valores não numéricos");
     }
-    if (value > 0) {
+    else if (value > 0) {
       this.balance += value;
     } else {
       throw new Error("Não é possível depositar valores negativos");
@@ -82,8 +80,7 @@ class Account {
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
-        }
-        else {
+        }else {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
@@ -92,14 +89,11 @@ class Account {
         if (emailRegex.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
-        }
-        else {
+        }else {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
         let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
@@ -111,18 +105,15 @@ class Account {
         return "Tipo de chave inexistente";
     }
   }
-
   withdraw(value) {
-    if (value > 0 && typeof value === 'number') {
-      if (this.balance - value > 0) {
-        this.balance -= value;
-        return value;
-      } else {
-        throw new Error("Você não possui saldo suficiente");
-      }
-    } else {
+    if (typeof value !== 'number' || value <= 0) {
       throw new Error("Valor inválido de saque");
+    } else if (this.balance < value) {
+      throw new Error("Você não possui saldo suficiente");
     }
+    
+    this.balance -= value;
+    return value;
   }
 
   transfer(value, accountNumber, agency) {
@@ -134,13 +125,9 @@ class Account {
 
     if (!validAccount) {
       throw new Error("Conta não encontrada")
-    }
-
-    if (value < 0) {
+    } else if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    }
-
-    if (this.balance - value > 0) {
+    } else if (this.balance - value > 0) {
       validAccount.setBalance(value);
       this.balance -= value;
       return "Transferência feita com sucesso";
@@ -156,13 +143,9 @@ class Account {
 
     if (!validAccount) {
       throw new Error("Chave pix não encontrada")
-    }
-
-    if (value < 0) {
+    } else if (value < 0) {
       throw new Error("Valor inválido de pix");
-    }
-
-    if (this.balance - value > 0) {
+    } else if (this.balance - value > 0) {
       this.balance -= value;
       validAccount.setBalance(value);
       return "Pix feito com sucesso";
