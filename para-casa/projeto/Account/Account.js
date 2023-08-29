@@ -14,8 +14,8 @@ class Account {
     this.pixKeys = {
       cpf: undefined,
       email: undefined,
-      telefone: undefined
-    }
+      telefone: undefined,
+    };
     Account.all.push(this); // a cada instância é adicionada a lista estática de all
   }
 
@@ -49,11 +49,11 @@ class Account {
   }
 
   setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
+    this.accountNumber = accountNumber;
   }
 
   setAgency(agency) {
-    this.agency = agency
+    this.agency = agency;
   }
 
   setBalance(value) {
@@ -74,13 +74,13 @@ class Account {
   createPixKey(keyValue, keyType) {
     switch (keyType) {
       case "CPF":
-        const regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+        const regex =
+          /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
 
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
@@ -89,19 +89,17 @@ class Account {
         if (emailRegex.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
-        const phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
+        const phoneRegex =
+          /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
 
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, telefone inválido");
         }
       default:
@@ -110,7 +108,7 @@ class Account {
   }
 
   withdraw(value) {
-    if (value > 0 && typeof value === 'number') {
+    if (value > 0 && typeof value === "number") {
       if (this.balance - value > 0) {
         this.balance -= value;
         return value;
@@ -123,14 +121,14 @@ class Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.all.find((account) => {
       const accNumber = account.getAccountNumber();
       const accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
-    })
+    });
 
     if (!validAccount) {
-      throw new Error("Conta não encontrada")
+      throw new Error("Conta não encontrada");
     }
 
     if (value < 0) {
@@ -147,12 +145,12 @@ class Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.all.find((account) => {
       return account.pixKeys[keyType] === pixKey;
-    })
+    });
 
     if (!validAccount) {
-      throw new Error("Chave pix não encontrada")
+      throw new Error("Chave pix não encontrada");
     }
 
     if (value < 0) {

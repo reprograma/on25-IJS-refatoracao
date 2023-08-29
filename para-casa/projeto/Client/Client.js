@@ -5,7 +5,7 @@ class Client {
   #cpf;
   #account;
   #income;
-  
+
   registerClient(name, cpf, account, income) {
     if (account instanceof Account) {
       this.name = name;
