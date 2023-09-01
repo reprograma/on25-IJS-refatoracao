@@ -1,71 +1,74 @@
 import Account from "../Account/Account";
 
 class PremiumAccount extends Account {
-  transactionLimit;
-  
   constructor() {
     super();
   }
 
   createAccount(accountNumber, agency, balance, income) {
-    if (income < 18000) {
-      throw new Error("Renda incompatível com o tipo de conta")
+    if (!this.isIncomeCompatible(income) || !this.isValidAccountData(accountNumber, agency, balance)) {
+      throw new Error("Renda incompatível ou dados inválidos para cadastro");
     }
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.accountNumber=accountNumber;
-      this.agency=agency;
-      this.balance = balance;
-      this.income = income;
-      return "Conta criada com sucesso";
-    } else {
-      throw new Error("Dados inválidos para cadastro");
-    }
+
+    this.initializeAccount(accountNumber, agency, balance, income);
+    return "Conta criada com sucesso";
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
-      let accNumber = account.getAccountNumber();
-      let accAgency = account.getAgency();
-      return accNumber === accountNumber && accAgency === agency; 
-    })
+    const validAccount = this.findValidAccount(accountNumber, agency);
+    this.validateOperation(value);
 
-    if (!validAccount) {
-      throw new Error ("Conta não encontrada")
-    }
+    validAccount.setBalance(value);
+    this.adjustBalance(-value);
 
-    if (value < 0) {
-      throw new Error("Valor inválido de transferência");
-    }
-
-    if (this.balance - value > 0) {
-      validAccount.setBalance(value);
-      this.balance -= value;
-      return "Transferência feita com sucesso";
-    } else {
-      throw new Error("Você não possui saldo suficiente");
-    }
+    return "Transferência feita com sucesso";
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
-      return account.pixKeys[keyType] === pixKey;
-    })
-  
+    const validAccount = this.findValidPixAccount(pixKey, keyType);
+    this.validateOperation(value);
+
+    this.adjustBalance(-value);
+    validAccount.setBalance(value);
+
+    return "Pix feito com sucesso";
+  }
+
+  isIncomeCompatible(income) {
+    return income >= 18000;
+  }
+
+  isValidAccountData(accountNumber, agency, balance) {
+    return accountNumber.length === 5 && agency.length === 4 && balance > 0;
+  }
+
+  initializeAccount(accountNumber, agency, balance, income) {
+    this.accountNumber = accountNumber;
+    this.agency = agency;
+    this.balance = balance;
+    this.income = income;
+  }
+
+  findValidAccount(accountNumber, agency) {
+    const validAccount = Account.all.find((account) => (
+      account.getAccountNumber() === accountNumber && account.getAgency() === agency
+    ));
+
     if (!validAccount) {
-      throw new Error ("Chave pix não encontrada")
+      throw new Error("Conta não encontrada");
     }
 
-    if (value < 0) {
-      throw new Error("Valor inválido de pix");
-    }
+    return validAccount;
+  }
 
-    if (this.balance - value > 0) {
-      this.balance -= value;
-      validAccount.setBalance(value);
-      return "Pix feito com sucesso";
-    } else {
-      throw new Error("Você não possui saldo suficiente");
+  validateOperation(value) {
+    if (value < 0 || this.balance - value < 0) {
+      throw new Error("Operação inválida: saldo insuficiente ou valor negativo");
     }
+  }
+
+  adjustBalance(amount) {
+    this.balance += amount;
   }
 }
 
