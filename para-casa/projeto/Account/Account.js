@@ -1,74 +1,72 @@
-class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
-  accountNumber;
-  agency;
-  balance;
+class Account { 
+  #accountNumber;
+  #agency;
+  #balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static allAcc = []; 
 
   constructor(accountNumber, agency, balance) {
-    this.accountNumber = accountNumber;
-    this.agency = agency;
-    this.balance = balance;
+    this.#accountNumber = accountNumber;
+    this.#agency = agency;
+    this.#balance = balance;
     this.pixKeys = {
-      cpf: undefined,
-      email: undefined,
-      telefone: undefined
-    }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+      cpf: null,
+      email: null,
+      telefone: null,
+    };
+    Account.allAcc.push(this);
   }
-
-  // método para remover uma conta da lista e evitar que problemas de memória
+ 
   destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    let i = Account.allAcc.indexOf(this);
+    Account.allAcc.splice(i, 1);
   }
 
   createAccount(accountNumber, agency, balance) {
     if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.accountNumber = accountNumber;
-      this.agency = agency;
-      this.balance = balance;
+      this.#accountNumber = accountNumber;
+      this.#agency = agency;
+      this.#balance = balance;
       return "Conta criada com sucesso";
     } else {
       throw new Error("Dados inválidos para cadastro");
     }
   }
 
-  getBalance() {
-    return this.balance;
+  get Balance() {
+    return this.#balance;
   }
 
-  getAgency() {
-    return this.agency;
+  get Agency() {
+    return this.#agency;
   }
 
-  getAccountNumber() {
-    return this.accountNumber;
+  get AccountNumber() {
+    return this.#accountNumber;
   }
 
-  setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
-    return this.accountNumber
+  set AccountNumber(accountNumber) {
+    this.#accountNumber = accountNumber;
+    return this.#accountNumber;
   }
 
-  setAgency(agency) {
-    this.agency = agency
-    return this.agency
+  set Agency(agency) {
+    this.#agency = agency;
+    return this.#agency;
   }
 
-  setBalance(value) {
-    this.balance += value;
-    return this.balance;
+  set Balance(value) {
+    this.#balance += value;
+    return this.#balance;
   }
 
-  deposit(value) {
-    if (typeof value === 'string' || typeof value === 'boolean') {
+  deposit(amount) {
+    if (typeof amount === "string" || typeof amount === "boolean") {
       throw new Error("Não é possível depositar valores não numéricos");
     }
-    if (value > 0) {
-      this.balance += value;
+    if (amount > 0) {
+      this.#balance += amount;
     } else {
       throw new Error("Não é possível depositar valores negativos");
     }
@@ -82,8 +80,7 @@ class Account {
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, cpf inválido");
         }
       case "EMAIL":
@@ -92,19 +89,16 @@ class Account {
         if (emailRegex.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, email inválido");
         }
       case "TELEFONE":
         let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
 
-
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
-        }
-        else {
+        } else {
           throw new Error("Erro, telefone inválido");
         }
       default:
@@ -113,9 +107,9 @@ class Account {
   }
 
   withdraw(value) {
-    if (value > 0 && typeof value === 'number') {
-      if (this.balance - value > 0) {
-        this.balance -= value;
+    if (value > 0 && typeof value === "number") {
+      if (this.#balance - value > 0) {
+        this.#balance -= value;
         return value;
       } else {
         throw new Error("Você não possui saldo suficiente");
@@ -126,23 +120,19 @@ class Account {
   }
 
   transfer(value, accountNumber, agency) {
-    const validAccount = Account.all.find(account => {
-      let accNumber = account.getAccountNumber();
-      let accAgency = account.getAgency();
+    const validAccount = Account.allAcc.find((account) => {
+      let accNumber = account.AccountNumber;
+      let accAgency = account.Agency;
       return accNumber === accountNumber && accAgency === agency;
-    })
+    });
 
     if (!validAccount) {
-      throw new Error("Conta não encontrada")
-    }
-
-    if (value < 0) {
+      throw new Error("Conta não encontrada");
+    } else if (value < 0) {
       throw new Error("Valor inválido de transferência");
-    }
-
-    if (this.balance - value > 0) {
-      validAccount.setBalance(value);
-      this.balance -= value;
+    } else if (this.#balance - value > 0) {
+      validAccount.Balance = value;
+      this.#balance -= value;
       return "Transferência feita com sucesso";
     } else {
       throw new Error("Você não possui saldo suficiente");
@@ -150,21 +140,17 @@ class Account {
   }
 
   pix(value, pixKey, keyType) {
-    const validAccount = Account.all.find(account => {
+    const validAccount = Account.allAcc.find((account) => {
       return account.pixKeys[keyType] === pixKey;
-    })
+    });
 
     if (!validAccount) {
-      throw new Error("Chave pix não encontrada")
-    }
-
-    if (value < 0) {
+      throw new Error("Chave pix não encontrada");
+    } else if (value < 0) {
       throw new Error("Valor inválido de pix");
-    }
-
-    if (this.balance - value > 0) {
-      this.balance -= value;
-      validAccount.setBalance(value);
+    } else if (this.#balance - value > 0) {
+      this.#balance -= value;
+      validAccount.Balance = value;
       return "Pix feito com sucesso";
     } else {
       throw new Error("Você não possui saldo suficiente");
