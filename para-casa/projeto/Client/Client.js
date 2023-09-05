@@ -6,13 +6,6 @@ class Client {
   #account;
   #income;
   
-  // constructor(name, cpf, account, income) {
-  //   this.name = name;
-  //   this.#cpf = cpf;
-  //   this.#account = account;
-  //   this.#income = income;
-  // }
-
   registerClient(name, cpf, account, income) {
     if (account instanceof Account) {
       this.name = name;
@@ -27,4 +20,4 @@ class Client {
   }
 }
 
-export default Client;
+module.exports = { Client };

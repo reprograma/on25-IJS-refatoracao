@@ -1,5 +1,5 @@
-import Account from '../Account/Account.js';
-import Client from './Client.js';
+const { Account } = require ('../Account/Account');
+const { Client } = require ('./Client');
 
 describe("Teste da classe Client", () => {
   test("verificar se instancia do Client é feita corretamente", () => {

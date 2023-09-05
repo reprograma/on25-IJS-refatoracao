@@ -1,4 +1,4 @@
-import GoldAccount from "./GoldAccount.js";
+const { GoldAccount } = require ("./GoldAccount");
 
 describe("Teste da classe GoldAccount", () => {
   test("verificar se instancia de GoldAccount é feita corretamente", () => {
@@ -13,7 +13,7 @@ describe("Teste da classe GoldAccount", () => {
   // positivo -> deposito com valor positivo
   test("deposito com valor de 100 reais", () => {
     const goldAccount = new GoldAccount();
-    goldAccount.createAccount('12345', '0001', 1000, 6000);
+    goldAccount.createAccount();
     goldAccount.deposit(100);
 
     expect(goldAccount.getBalance()).toBe(1100);
@@ -26,7 +26,7 @@ describe("Teste da classe GoldAccount", () => {
   // negativo -> deposito com valor negativo
   test("deposito com valor de -100", () => {
     const goldAccount = new GoldAccount();
-    goldAccount.createAccount('12345', '0001', 1000, 6000);
+    goldAccount.createAccount();
     expect(() => goldAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
     expect(goldAccount.getBalance()).toBe(1000);
     
@@ -38,7 +38,7 @@ describe("Teste da classe GoldAccount", () => {
   // negativo -> deposito com valor não numérico
   test("deposito com valor não númérico", () => {
     const goldAccount = new GoldAccount();
-    goldAccount.createAccount('12345', '0001', 1000, 6000);
+    goldAccount.createAccount();
     expect(() => goldAccount.deposit("")).toThrow("Não é possível depositar valores não numéricos");
     expect(goldAccount.getBalance()).toBe(1000);
     
@@ -49,7 +49,7 @@ describe("Teste da classe GoldAccount", () => {
 
   test("instaciar conta com valores válidos", () => {
     const goldAccount = new GoldAccount();
-    goldAccount.createAccount('12345', '0001', 1000, 6000);
+    goldAccount.createAccount();
     expect(goldAccount.getBalance()).toBe(1000);
     expect(goldAccount.getAccountNumber()).toBe('12345');
     expect(goldAccount.getAgency()).toBe('0001');
@@ -63,7 +63,7 @@ describe("Teste da classe GoldAccount", () => {
   test("criar conta de com dados válidos e renda compatível", () => {
     // numero conta (5 digitos) agencia (4 digitos) e saldo (numero positivo)
     const goldAccount = new GoldAccount();
-    expect(goldAccount.createAccount("12345", "0001", 500, 6000)).toBe("Conta criada com sucesso");
+    expect(goldAccount.createAccount()).toBe("Conta criada com sucesso");
     expect(goldAccount.getBalance()).toBe(500);
     expect(goldAccount.getAccountNumber()).toBe('12345');
     expect(goldAccount.getAgency()).toBe('0001');
@@ -76,7 +76,7 @@ describe("Teste da classe GoldAccount", () => {
   test("criar conta de com dados válidos e renda incompatível", () => {
     // numero conta (5 digitos) agencia (4 digitos) e saldo (numero positivo)
     const goldAccount = new GoldAccount();
-    expect(() => goldAccount.createAccount("12345", "0001", 500, 4000)).toThrow("Renda incompatível com o tipo de conta");
+    expect(() => goldAccount.createAccount()).toThrow("Renda incompatível com o tipo de conta");
     
     // remover da lista de instâncias
     goldAccount.destroy()

@@ -1,4 +1,4 @@
-import PremiumAccount from "./PremiumAccount.js";
+const { PremiumAccount } = require ("./PremiumAccount");
 
 describe("Teste da classe premiumAccount", () => {
   test("verificar se instancia de premiumAccount é feita corretamente", () => {
@@ -13,7 +13,7 @@ describe("Teste da classe premiumAccount", () => {
   // positivo -> deposito com valor positivo
   test("deposito com valor de 100 reais", () => {
     const premiumAccount = new PremiumAccount();
-    premiumAccount.createAccount('12345', '0001', 10000, 20000);
+    premiumAccount.createAccount();
     premiumAccount.deposit(100);
 
     expect(premiumAccount.getBalance()).toBe(10100);
@@ -26,7 +26,7 @@ describe("Teste da classe premiumAccount", () => {
   // negativo -> deposito com valor negativo
   test("deposito com valor de -100", () => {
     const premiumAccount = new PremiumAccount();
-    premiumAccount.createAccount('12345', '0001', 10000, 20000);
+    premiumAccount.createAccount();
     expect(() => premiumAccount.deposit(-100)).toThrow("Não é possível depositar valores negativos");
     expect(premiumAccount.getBalance()).toBe(10000);
 

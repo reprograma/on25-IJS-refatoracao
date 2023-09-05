@@ -1,22 +1,21 @@
-import Account from "../Account/Account";
+const { Account } = require ("../Account/Account");
 
 class GoldAccount extends Account {
   transactionLimit;
+  income;
   
-  constructor() {
-    super();
+  constructor(accountNumber, agency, balance, income) {
+    super(accountNumber, agency, balance);
+    this.income = income;
     this.transactionLimit = 5000;
   }
 
-  createAccount(accountNumber, agency, balance, income) {
-    if (income < 5000 || income > 17999.99) {
+  createAccount() {
+    if (this.income < 5000 || this.income > 17999.99) {
       throw new Error("Renda incompatível com o tipo de conta")
     }
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.accountNumber=accountNumber;
-      this.agency=agency;
-      this.balance = balance;
-      this.income = income;
+    if (this.accountNumber.length === 5 && this.agency.length === 4 && this.balance > 0) {
+        this.income = income;
       return "Conta criada com sucesso";
     } else {
       throw new Error("Dados inválidos para cadastro");
@@ -78,4 +77,4 @@ class GoldAccount extends Account {
   }
 }
 
-export default GoldAccount;
+module.exports = { GoldAccount };
