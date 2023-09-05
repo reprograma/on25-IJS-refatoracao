@@ -25,11 +25,8 @@ class Account {
     Account.all.splice(i, 1);
   }
 
-  createAccount(accountNumber, agency, balance) {
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.accountNumber = accountNumber;
-      this.agency = agency;
-      this.balance = balance;
+  createAccount() {
+    if (this.accountNumber.length === 5 && this.agency.length === 4 && this.balance > 0) {
       return "Conta criada com sucesso";
     } else {
       throw new Error("Dados inválidos para cadastro");
@@ -49,18 +46,15 @@ class Account {
   }
 
   setAccountNumber(accountNumber) {
-    this.accountNumber = accountNumber
-    return this.accountNumber
+    return this.accountNumber = accountNumber;
   }
 
   setAgency(agency) {
-    this.agency = agency
-    return this.agency
+    return this.agency = agency;
   }
 
   setBalance(value) {
-    this.balance += value;
-    return this.balance;
+    return this.balance += value;
   }
 
   deposit(value) {
@@ -78,7 +72,6 @@ class Account {
     switch (keyType) {
       case "CPF":
         let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
-
         if (regex.test(keyValue)) {
           this.pixKeys.cpf = keyValue;
           return "Chave pix cpf criada com sucesso";
@@ -88,7 +81,6 @@ class Account {
         }
       case "EMAIL":
         let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
         if (emailRegex.test(keyValue)) {
           this.pixKeys.email = keyValue;
           return "Chave pix email criada com sucesso";
@@ -98,8 +90,6 @@ class Account {
         }
       case "TELEFONE":
         let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-
-
         if (phoneRegex.test(keyValue)) {
           this.pixKeys.telefone = keyValue;
           return "Chave pix telefone criada com sucesso";
@@ -172,4 +162,4 @@ class Account {
   }
 }
 
-export default Account;
+module.exports = { Account };

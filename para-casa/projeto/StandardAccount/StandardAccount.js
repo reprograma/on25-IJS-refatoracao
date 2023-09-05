@@ -1,21 +1,19 @@
-import Account from "../Account/Account";
+const { Account } = require("../Account/Account");
 
 class StandardAccount extends Account {
   transactionLimit;
   
-  constructor() {
-    super();
+  constructor(accountNumber, agency, balance, income) {
+    super(accountNumber, agency, balance);
+    this.income = income;
     this.transactionLimit = 1000;
   }
 
-  createAccount(accountNumber, agency, balance, income) {
-    if (income > 4999) {
+  createAccount() {
+    if (this.income > 4999) {
       throw new Error("Renda incompatível com o tipo de conta")
     }
-    if (accountNumber.length === 5 && agency.length === 4 && balance > 0) {
-      this.accountNumber=accountNumber;
-      this.agency=agency;
-      this.balance=balance;
+    if (this.accountNumber.length === 5 && this.agency.length === 4 && this.balance > 0) {
       return "Conta criada com sucesso";
     } else {
       throw new Error("Dados inválidos para cadastro");
@@ -77,4 +75,4 @@ class StandardAccount extends Account {
   }
 }
 
-export default StandardAccount;
+module.exports = { StandardAccount };

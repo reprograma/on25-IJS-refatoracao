@@ -1,4 +1,4 @@
-import StandardAccount from "./StandardAccount.js";
+const { StandardAccount } = require("./StandardAccount");
 
 describe("Teste da classe StandardAccount", () => {
   test("verificar se instancia de StandardAccount é feita corretamente", () => {
