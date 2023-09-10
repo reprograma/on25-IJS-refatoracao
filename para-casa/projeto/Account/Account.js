@@ -1,25 +1,24 @@
-class Account {
-  // removi o private dos atributos para lidar melhor com a herança já que o javascript não lida muito bem com protected
+class Account {  
   accountNumber;
   agency;
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+
+  static all = []; 
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
     this.agency = agency;
-    this.balance = balance;
+    this.balance = this.balance;
     this.pixKeys = {
       cpf: undefined,
       email: undefined,
       telefone: undefined
     }
-    Account.all.push(this); // a cada instância é adicionada a lista estática de all
+    Account.all.push(this); 
   }
 
-  // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
     let i = Account.all.indexOf(this);
     Account.all.splice(i, 1);
@@ -172,4 +171,4 @@ class Account {
   }
 }
 
-export default Account;
+module.exports = { Account };

@@ -1,11 +1,9 @@
-import Account from '../Account/Account.js';
-import Client from './Client.js';
+const { Account } = require('../Account/Account');
+const { Client } = require('./Client');
 
 describe("Teste da classe Client", () => {
   test("verificar se instancia do Client é feita corretamente", () => {
     const client = new Client();
-    // instanciaASerVerificada instanceof Classe -> true ou false
-    // alternativa: expect(client).toBeInstanceOf(Client);
     expect(client instanceof Client).toBe(true);
   });
 
