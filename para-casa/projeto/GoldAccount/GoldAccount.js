@@ -1,4 +1,4 @@
-import Account from "../Account/Account";
+const { Account } = require('../Account/Account')
 
 class GoldAccount extends Account {
   transactionLimit;
@@ -78,4 +78,4 @@ class GoldAccount extends Account {
   }
 }
 
-export default GoldAccount;
+module.exports = { GoldAccount };

@@ -1,24 +1,24 @@
-import Account from "../Account/Account.js";
+const { Account } = require('../Account/Account.js')
 
 class Client {
   name;
-  #cpf;
-  #account;
-  #income;
+  cpf;
+  account;
+  income;
   
-  // constructor(name, cpf, account, income) {
-  //   this.name = name;
-  //   this.#cpf = cpf;
-  //   this.#account = account;
-  //   this.#income = income;
-  // }
+  constructor(name, cpf, account, income) {
+     this.name = name;
+     this.cpf = cpf;
+     this.account = account;
+     this.income = income;
+   }
 
   registerClient(name, cpf, account, income) {
     if (account instanceof Account) {
       this.name = name;
-      this.#cpf = cpf;
-      this.#account = account;
-      this.#income = income;
+      this.cpf = cpf;
+      this.account = account;
+      this.income = income;
 
       return "Cliente cadastrado";
     } else {
@@ -27,4 +27,4 @@ class Client {
   }
 }
 
-export default Client;
+module.exports = { Client }
