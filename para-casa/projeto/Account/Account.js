@@ -3,26 +3,38 @@ class Account {
   accountNumber;
   agency;
   balance;
-  pixKeys;
-  income;
+  pixKeys = {
+    cpf: undefined,
+    email: undefined,
+    telefone: undefined
+  };
   static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
 
   constructor(accountNumber, agency, balance) {
-    this.accountNumber = accountNumber;
-    this.agency = agency;
-    this.balance = balance;
-    this.pixKeys = {
-      cpf: undefined,
-      email: undefined,
-      telefone: undefined
+    if (this.validateAccountData(accountNumber, agency, balance)) {
+      this.accountNumber = accountNumber;
+      this.agency = agency;
+      this.balance = balance;
+      Account.all.push(this);
+    } else {
+      throw new Error("Dados inválidos para cadastro");
     }
     Account.all.push(this); // a cada instância é adicionada a lista estática de all
   }
 
+  validateAccountData(accountNumber, agency, balance) {
+    return (
+      accountNumber.length === 5 &&
+      agency.length === 4 &&
+      typeof balance === 'number' &&
+      balance > 0
+    );
+  }
+
   // método para remover uma conta da lista e evitar que problemas de memória
   destroy() {
-    let i = Account.all.indexOf(this);
-    Account.all.splice(i, 1);
+    let index = Account.all.indexOf(this);
+    Account.all.splice(index, 1);
   }
 
   createAccount(accountNumber, agency, balance) {
@@ -75,42 +87,60 @@ class Account {
   }
 
   createPixKey(keyValue, keyType) {
-    switch (keyType) {
-      case "CPF":
-        let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+    const validKeyTypes = Object.keys(this.#pixKeyRegex);
 
-        if (regex.test(keyValue)) {
-          this.pixKeys.cpf = keyValue;
-          return "Chave pix cpf criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, cpf inválido");
-        }
-      case "EMAIL":
-        let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!validKeyTypes.includes(keyType)) {
+      throw new Error("Tipo de chave PIX inválido");
+    }
 
-        if (emailRegex.test(keyValue)) {
-          this.pixKeys.email = keyValue;
-          return "Chave pix email criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, email inválido");
-        }
-      case "TELEFONE":
-        let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+    const regex = this.#pixKeyRegex[keyType];
 
-
-        if (phoneRegex.test(keyValue)) {
-          this.pixKeys.telefone = keyValue;
-          return "Chave pix telefone criada com sucesso";
-        }
-        else {
-          throw new Error("Erro, telefone inválido");
-        }
-      default:
-        return "Tipo de chave inexistente";
+    if (regex.test(keyValue)) {
+      this.#pixKeys[keyType.toLowerCase()] = keyValue;
+      return `Chave PIX ${keyType.toLowerCase()} criada com sucesso`;
+    } else {
+      throw new Error(`Erro, ${keyType.toLowerCase()} inválido`);
     }
   }
+
+  // createPixKey(keyValue, keyType) {
+    
+  //   switch (keyType) {
+  //     case "CPF":
+  //       let regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+
+  //       if (regex.test(keyValue)) {
+  //         this.pixKeys.cpf = keyValue;
+  //         return "Chave pix cpf criada com sucesso";
+  //       }
+  //       else {
+  //         throw new Error("Erro, cpf inválido");
+  //       }
+  //     case "EMAIL":
+  //       let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  //       if (emailRegex.test(keyValue)) {
+  //         this.pixKeys.email = keyValue;
+  //         return "Chave pix email criada com sucesso";
+  //       }
+  //       else {
+  //         throw new Error("Erro, email inválido");
+  //       }
+  //     case "TELEFONE":
+  //       let phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+
+
+  //       if (phoneRegex.test(keyValue)) {
+  //         this.pixKeys.telefone = keyValue;
+  //         return "Chave pix telefone criada com sucesso";
+  //       }
+  //       else {
+  //         throw new Error("Erro, telefone inválido");
+  //       }
+  //     default:
+  //       return "Tipo de chave inexistente";
+  //   }
+  // }
 
   withdraw(value) {
     if (value > 0 && typeof value === 'number') {
