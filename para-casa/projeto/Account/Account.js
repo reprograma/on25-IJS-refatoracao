@@ -4,7 +4,7 @@ class Account {
   balance;
   pixKeys;
   income;
-  static all = []; // forma estática de manter tracking e todas as instâncias da classe Account
+  static all = [];
 
   constructor(accountNumber, agency, balance) {
     this.accountNumber = accountNumber;
@@ -124,7 +124,7 @@ class Account {
       let accNumber = account.getAccountNumber();
       let accAgency = account.getAgency();
       return accNumber === accountNumber && accAgency === agency;
-    })
+    });
 
     if (!validAccount) {
       throw new Error("Conta não encontrada");

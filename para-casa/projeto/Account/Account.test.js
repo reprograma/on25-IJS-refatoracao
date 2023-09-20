@@ -1,8 +1,8 @@
 import Account from "./Account.js";
-
+let account = {};
 describe("Teste da classe Account", () => {
   test("verificar se instancia de Account é feita corretamente", () => {
-    const account = new Account();
+    //this.account = new Account();
     expect(account instanceof Account).toBe(true);
     
     // remover da lista de instâncias
@@ -12,7 +12,7 @@ describe("Teste da classe Account", () => {
 
   // positivo -> deposito com valor positivo
   test("deposito com valor de 100 reais", () => {
-    const account = new Account(1, 1, 1000);
+    account.createAccount(1, 1, 1000);
     account.deposit(100);
 
     expect(account.getBalance()).toBe(1100);
